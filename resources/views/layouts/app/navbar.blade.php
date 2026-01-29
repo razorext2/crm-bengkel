@@ -10,7 +10,8 @@
                         <img class="hidden h-8 w-auto dark:block"
                             src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full-dark.svg" alt="">
                     </a> --}}
-                    <h1 class="text-2xl font-extrabold text-red-700"> Bengkel<span class="font-semibold italic">Mu</span>
+                    <h1 class="text-2xl font-extrabold text-red-700"> MolJaya<span class="font-semibold italic">Motor
+                        </span>
                     </h1>
                 </div>
 
@@ -214,7 +215,7 @@
                     class="z-10 hidden w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
                     <ul class="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
                         <li>
-                            <a href="#" title=""
+                            <a href="{{ route('account.my') }}" title=""
                                 class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                 Akun Saya
                             </a>
