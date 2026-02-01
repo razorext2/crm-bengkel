@@ -13,7 +13,10 @@ Route::livewire('/product/1', 'pages::product.item')->name('product.item');
 Route::prefix('account')
     ->name('account.')
     ->group(function () {
-        Route::livewire('/me', 'pages::account.my')->name('my');
+        Route::livewire('/me', 'pages::account.me')->name('me');
+        Route::livewire('/order', 'pages::account.order')->name('order');
+        Route::livewire('/settings', 'pages::account.settings')->name('settings');
+        Route::livewire('/favorite', 'pages::account.favorite')->name('favorite');
     });
 
 // require __DIR__.'/settings.php';

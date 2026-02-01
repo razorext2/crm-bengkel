@@ -88,7 +88,7 @@ new class extends Component {
 
                     <div class="mt-6 sm:flex sm:items-center sm:gap-4">
                         <a href="#" title=""
-                            class="hover:text-primary-700 flex items-center justify-center rounded-lg border border-pink-200 bg-white px-5 py-2.5 text-sm font-medium text-pink-900 hover:bg-pink-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-pink-100 dark:border-pink-600 dark:bg-pink-800 dark:text-pink-400 dark:hover:bg-pink-700 dark:hover:text-white dark:focus:ring-pink-700"
+                            class="flex items-center justify-center rounded-lg border border-pink-200 bg-white px-5 py-2.5 text-sm font-medium text-pink-900 hover:bg-pink-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-pink-100 dark:border-pink-600 dark:bg-pink-800 dark:text-pink-400 dark:hover:bg-pink-700 dark:hover:text-white dark:focus:ring-pink-700"
                             role="button">
                             <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@ new class extends Component {
                         </a>
 
                         <a href="#" title=""
-                            class="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mt-4 flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-gray-500 focus:outline-none focus:ring-4 sm:mt-0"
+                            class="mt-4 flex items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:mt-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             role="button">
                             <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -140,7 +140,7 @@ new class extends Component {
                                 class="sr-only mb-2 block text-sm font-medium text-gray-900 dark:text-white">Select
                                 review type</label>
                             <select id="order-type"
-                                class="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400">
+                                class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                 <option selected>All reviews</option>
                                 <option value="5">5 stars</option>
                                 <option value="4">4 stars</option>
@@ -1238,7 +1238,7 @@ new class extends Component {
                             </li>
                             <li>
                                 <a href="#" aria-current="page"
-                                    class="border-primary-300 bg-primary-50 text-primary-600 hover:bg-primary-100 hover:text-primary-700 z-10 flex h-8 items-center justify-center border px-3 leading-tight dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                                    class="z-10 flex h-8 items-center justify-center border border-blue-300 bg-blue-50 px-3 leading-tight text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                             </li>
                             <li>
                                 <a href="#"
@@ -1371,7 +1371,7 @@ new class extends Component {
                                     class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Review
                                     title</label>
                                 <input type="text" name="title" id="title"
-                                    class="focus:border-primary-600 focus:ring-primary-600 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400"
+                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     required="" />
                             </div>
                             <div class="col-span-2">
@@ -1379,31 +1379,31 @@ new class extends Component {
                                     class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Review
                                     description</label>
                                 <textarea id="description" rows="6"
-                                    class="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 mb-2 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400"
+                                    class="mb-2 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     required=""></textarea>
                                 <p class="ms-auto text-xs text-gray-500 dark:text-gray-400">Problems with the product
                                     or delivery? <a href="#"
-                                        class="text-primary-600 dark:text-primary-500 hover:underline">Send a
+                                        class="text-blue-600 hover:underline dark:text-blue-500">Send a
                                         report</a>.</p>
                             </div>
                             <div class="col-span-2">
                                 <div class="flex items-center">
                                     <input id="review-checkbox" type="checkbox" value=""
-                                        class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800" />
+                                        class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600" />
                                     <label for="review-checkbox"
                                         class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-400">By
                                         publishing this review you agree with the <a href="#"
-                                            class="text-primary-600 dark:text-primary-500 hover:underline">terms and
+                                            class="text-blue-600 hover:underline dark:text-blue-500">terms and
                                             conditions</a>.</label>
                                 </div>
                             </div>
                         </div>
                         <div class="border-t border-gray-200 pt-4 md:pt-5 dark:border-gray-700">
                             <button type="submit"
-                                class="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 me-2 inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4">Edit
+                                class="me-2 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit
                                 review</button>
                             <button type="button" data-modal-toggle="editReviewModal"
-                                class="hover:text-primary-700 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Cancel</button>
+                                class="me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Cancel</button>
                         </div>
                     </form>
                 </div>
