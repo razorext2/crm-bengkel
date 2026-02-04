@@ -1,5 +1,7 @@
 {
-    "agents": ["codex"],
+    "agents": [
+        "codex"
+    ],
     "guidelines": true,
     "skills": [
         "livewire-development",
