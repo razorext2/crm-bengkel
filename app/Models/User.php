@@ -50,6 +50,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function review()
+    {
+        return $this->hasMany(ProductReview::class, 'user_id', 'id');
+    }
+
     /**
      * Get the user's initials
      */

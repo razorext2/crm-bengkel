@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::livewire('/', 'pages::landing')->name('home');
 
-Route::livewire('/product/1', 'pages::product.item')->name('product.item');
+Route::livewire('/product/{id}', 'pages::product.item')->name('product.item');
 
 Route::prefix('account')
     ->name('account.')

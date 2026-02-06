@@ -3,7 +3,14 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+    public ?string $page;
+    public ?string $subpage;
+
+    public function mount($page, $subpage)
+    {
+        $this->page = $page;
+        $this->subpage = $subpage;
+    }
 };
 ?>
 
@@ -29,7 +36,8 @@ new class extends Component {
                 </svg>
                 <a href="#"
                     class="hover:text-primary-600 ms-1 text-sm font-medium text-gray-700 md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                    Oli</a>
+                    {{ $page }}
+                </a>
             </div>
         </li>
         <li aria-current="page">
@@ -39,7 +47,8 @@ new class extends Component {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m9 5 7 7-7 7" />
                 </svg>
-                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Oli MPX 1 Liter
+                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                    {{ $subpage }}
                 </span>
             </div>
         </li>

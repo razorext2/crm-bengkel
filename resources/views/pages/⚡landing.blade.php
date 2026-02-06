@@ -13,6 +13,6 @@ new class extends Component {
     <div class="mx-auto mb-16 w-fit rounded-lg bg-white shadow-lg dark:bg-gray-800">
         @include('layouts.app.categories')
 
-        @include('layouts.app.products')
+        @livewire('landing.products')
     </div>
 </div>
