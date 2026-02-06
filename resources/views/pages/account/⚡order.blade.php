@@ -8,7 +8,7 @@ new class extends Component {
 ?>
 
 <div class="mx-auto w-full max-w-screen-xl p-4 lg:p-8">
-    @livewire('utils.breadcumb')
+    @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Pesanan Saya'])
 
     <section
         class="rounded-lg border border-gray-200 bg-white p-2 antialiased shadow-md md:py-16 lg:p-4 dark:bg-gray-900">

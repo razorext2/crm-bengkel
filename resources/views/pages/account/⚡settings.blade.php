@@ -8,12 +8,13 @@ new class extends Component {
 ?>
 
 <div class="mx-auto w-full max-w-screen-xl p-4 lg:p-8">
-    @livewire('utils.breadcumb')
+    @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Pengaturan'])
 
     <section class="rounded-lg border border-gray-200 bg-white p-2 antialiased shadow-md lg:p-4 dark:bg-gray-900">
         <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
 
-            <h2 class="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:mb-6 dark:text-white">General overview
+            <h2 class="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:mb-6 dark:text-white">
+                Ringkasan Pesanan
             </h2>
             <div
                 class="grid grid-cols-2 gap-6 border-b border-t border-gray-200 py-4 md:py-8 lg:grid-cols-4 xl:gap-16 dark:border-gray-700">

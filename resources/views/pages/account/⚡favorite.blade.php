@@ -13,7 +13,7 @@ new class extends Component {
             <!-- Heading & Filters -->
             <div class="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
                 <div>
-                    @livewire('utils.breadcumb')
+                    @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Favorit'])
 
                     <h2 class="mt-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Favorit</h2>
                 </div>

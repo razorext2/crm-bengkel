@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Route;
 // })->name('home');
 
 Route::livewire('/', 'pages::landing')->name('home');
+Route::livewire('/log-in', 'pages::landing.login')->name('customer.login');
 
 Route::livewire('/product/{id}', 'pages::product.item')->name('product.item');
 
 Route::prefix('account')
+    ->middleware('auth')
     ->name('account.')
     ->group(function () {
         Route::livewire('/me', 'pages::account.me')->name('me');

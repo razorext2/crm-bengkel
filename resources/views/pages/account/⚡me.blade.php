@@ -8,7 +8,7 @@ new class extends Component {
 ?>
 
 <div class="mx-auto w-full max-w-screen-xl p-4 lg:p-8">
-    @livewire('utils.breadcumb')
+    @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Profil Saya'])
 
     <div class="flex gap-4 lg:gap-8">
         <div class="flex h-fit w-80 shrink flex-col gap-2 rounded-lg border border-gray-200 bg-white p-2 shadow-md lg:gap-4 lg:p-4"
@@ -20,10 +20,10 @@ new class extends Component {
                 </div>
                 <div class="ms-2 min-w-0 flex-1">
                     <p class="text-heading truncate font-medium">
-                        Neil Sims
+                        {{ auth()->user()->name }}
                     </p>
                     <p class="text-body truncate text-sm">
-                        email@windster.com
+                        {{ auth()->user()->email }}
                     </p>
                 </div>
             </div>
