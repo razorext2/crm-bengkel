@@ -11,11 +11,17 @@ class Product extends Model
     protected $fillable = [
         'category_id',
         'product_name',
+        'product_image_primary',
+        'product_images',
         'product_description',
         'product_unit',
         'product_weight',
         'price',
         'stock',
+    ];
+
+    protected $casts = [
+        'product_images' => 'array',
     ];
 
     public function category()
