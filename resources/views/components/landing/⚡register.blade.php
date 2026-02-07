@@ -3,28 +3,7 @@
 use Livewire\Component;
 
 new class extends Component {
-    public ?string $email;
-    public ?string $password;
-
-    protected function rules()
-    {
-        return [
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:8'],
-        ];
-    }
-
-    protected $messages = [
-        'email.required' => 'Email harus diisi.',
-        'email.email' => 'Format Email tidak valid.',
-        'password.required' => 'Password harus diisi.',
-        'password.min' => 'Password minimal 8 karakter.',
-    ];
-
-    public function login()
-    {
-        $this->validate();
-    }
+    //
 };
 ?>
 
@@ -42,9 +21,22 @@ new class extends Component {
                 class="w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0 dark:border dark:border-gray-700 dark:bg-gray-800">
                 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Masuk dengan akun anda.
+                        Buat akun anda.
                     </h1>
-                    <form class="space-y-4 md:space-y-6" wire:submit.prevent="login" action="#">
+                    <form class="space-y-4 md:space-y-6" wire:submit.prevent="login">
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                Nama Kamu
+                            </label>
+                            <input type="text" name="name" id="name"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                placeholder="Mr/Mrs Siapa" wire:model.live="name">
+
+                            @error('name')
+                                <p class="mt-2 text-sm italic text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <div>
                             <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                 Email
@@ -54,6 +46,19 @@ new class extends Component {
                                 placeholder="customer@email.com" wire:model.live="email">
 
                             @error('email')
+                                <p class="mt-2 text-sm italic text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                Nama Kamu
+                            </label>
+                            <input type="text" name="telephone" id="telephone"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                placeholder="08xx-xxxx-xxxx" wire:model.live="telephone">
+
+                            @error('telephone')
                                 <p class="mt-2 text-sm italic text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
@@ -82,9 +87,9 @@ new class extends Component {
                         </button>
 
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Belum punya akun? <a href="{{ route('register') }}"
+                            Sudah punya akun? <a href="{{ route('login') }}"
                                 class="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                Daftar Akun
+                                Masuk
                             </a>
                         </p>
                     </form>

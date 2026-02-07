@@ -257,11 +257,11 @@
                         </svg>
                     </button>
                 @else
-                    <div class="text-right text-xs md:text-sm">
+                    <div id="myCartDropdownButton1" class="text-right text-xs md:text-sm">
                         <p class="text-gray-800">Anda melihat sebagai <span class="font-bold">Guest</span></p>
-                        <p class="text-gray-800">Silahkan <a href="#"
+                        <p class="text-gray-800">Silahkan <a href="{{ route('register') }}"
                                 class="font-bold text-green-500">Daftar</a> atau
-                            <a href="{{ route('customer.login') }}" class="font-bold text-green-500">Login </a>
+                            <a href="{{ route('login') }}" class="font-bold text-green-500">Login </a>
                         </p>
                     </div>
                 @endif

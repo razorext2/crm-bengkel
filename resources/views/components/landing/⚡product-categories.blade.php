@@ -18,7 +18,7 @@ new class extends Component {
 
     <div class="grid w-full grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-4">
 
-        @foreach ($categories as $row)
+        @forelse ($categories as $row)
             <a href="#"
                 class="flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 lg:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
 
@@ -28,7 +28,11 @@ new class extends Component {
                     {{ $row->category_name }}
                 </span>
             </a>
-        @endforeach
+        @empty
+            <p class="text-gray-800">
+                Belum ada kategori yang ditambahkan.
+            </p>
+        @endforelse
 
     </div>
 

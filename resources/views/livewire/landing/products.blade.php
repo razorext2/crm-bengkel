@@ -4,7 +4,7 @@
 
     <div class="mb-4 grid grid-cols-2 gap-8 md:grid-cols-4">
 
-        @foreach ($products as $row)
+        @forelse ($products as $row)
             <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
                 <a href="{{ route('product.item', $row->id) }}">
                     <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
@@ -67,7 +67,9 @@
                 </div>
 
             </div>
-        @endforeach
+        @empty
+            <p class="text-gray-800">Belum ada produk yang ditambahkan.</p>
+        @endforelse
 
     </div>
 

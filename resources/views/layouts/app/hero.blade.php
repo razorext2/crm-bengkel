@@ -21,15 +21,14 @@
                 </svg>
             </a>
 
-            <a href="#"
+            <a href="{{ route('login') }}"
                 class="inline-flex items-center justify-center rounded-lg border border-gray-300 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                 Masuk
             </a>
         </div>
 
         <div class="hidden lg:col-span-5 lg:mt-0 lg:flex">
-            <img src="https://asset.honda-indonesia.com/variants/images/Iy60GzrAfQkhPQoO01QLw3M3lfxNJf2DTJvaIMV1.png"
-                alt="mockup">
+            <img src="{{ asset('img/moljaya.jpg') }}" alt="mockup">
         </div>
     </div>
 </section>
