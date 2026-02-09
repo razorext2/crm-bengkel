@@ -3,7 +3,65 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+    use App\Livewire\Concerns\HandlesErrors;
+
+    public ?string $name;
+    public ?string $email;
+    public ?string $phone;
+    public ?string $password;
+    public ?string $password_confirmation;
+
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required', 'string', 'min:8'],
+        ];
+    }
+
+    public function register()
+    {
+        // validasi input dari frontend
+        $this->validate();
+
+        $this->runSafely(
+            function () {
+                DB::transaction(function () {
+                    // tambah data user dan customer profile
+                    $user = App\Models\User::create([
+                        'name' => $this->name,
+                        'email' => $this->email,
+                        'password' => Hash::make($this->password),
+                    ]);
+
+                    // tambah data customer profile
+                    App\Models\CustomerProfile::create([
+                        'user_id' => $user->id,
+                        'phone_number' => $this->phone,
+                        'profile_photo' => null,
+                        'points' => 0,
+                    ]);
+
+                    // munculkan session alert
+                    session()->flash('alert', [
+                        'type' => 'green',
+                        'title' => 'Berhasil!',
+                        'message' => 'Akun berhasil dibuat, silahkan login untuk melanjutkan.',
+                    ]);
+
+                    // reset form field
+                    $this->redirect(route('login'));
+                });
+            },
+            'Terjadi kesalahan saat membuat akun.',
+            [
+                'data' => $this->all(),
+            ],
+        );
+    }
 };
 ?>
 
@@ -23,7 +81,16 @@ new class extends Component {
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Buat akun anda.
                     </h1>
-                    <form class="space-y-4 md:space-y-6" wire:submit.prevent="login">
+
+                    @if (session('alert'))
+                        <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title']">
+
+                            {{ session('alert')['message'] }}
+
+                        </x-utils.alert>
+                    @endif
+
+                    <form class="space-y-4 md:space-y-6" wire:submit.prevent="register">
                         <div>
                             <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                 Nama Kamu
@@ -52,13 +119,13 @@ new class extends Component {
 
                         <div>
                             <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                                Nama Kamu
+                                No. Telepon
                             </label>
-                            <input type="text" name="telephone" id="telephone"
+                            <input type="text" name="phone" id="phone"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                placeholder="08xx-xxxx-xxxx" wire:model.live="telephone">
+                                placeholder="08xx-xxxx-xxxx" wire:model.live="phone">
 
-                            @error('telephone')
+                            @error('phone')
                                 <p class="mt-2 text-sm italic text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
@@ -71,6 +138,20 @@ new class extends Component {
                                 wire:model="password">
 
                             @error('password')
+                                <p class="mt-2 text-sm italic text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="password-confirmation"
+                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Konfirmasi
+                                Password</label>
+                            <input type="password" name="password_confirmation" id="password-confirmation"
+                                placeholder="••••••••"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                wire:model="password_confirmation">
+
+                            @error('password_confirmation')
                                 <p class="mt-2 text-sm italic text-red-500">{{ $message }}</p>
                             @enderror
                         </div>

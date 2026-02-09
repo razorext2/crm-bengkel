@@ -82,7 +82,7 @@ new class extends Component {
                     </a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="/logout"
                         class="flex items-center rounded-md p-2 text-red-500 hover:bg-red-100 dark:hover:bg-red-700">
                         <x-icon.gear class="me-2 h-4 w-4 shrink-0" />
                         <span>Logout</span>

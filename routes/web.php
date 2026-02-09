@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 // })->name('home');
 
 Route::livewire('/', 'pages::landing')->name('home');
-// Route::livewire('/log-in', 'pages::landing.login')->name('customer.login');
 
 Route::livewire('/product/{id}', 'pages::product.item')->name('product.item');
 

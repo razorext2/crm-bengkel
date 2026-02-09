@@ -21,10 +21,10 @@ new class extends Component {
         'password.min' => 'Password minimal 8 karakter.',
     ];
 
-    public function login()
-    {
-        $this->validate();
-    }
+    // public function login()
+    // {
+    //     $this->validate();
+    // }
 };
 ?>
 
@@ -44,7 +44,17 @@ new class extends Component {
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Masuk dengan akun anda.
                     </h1>
-                    <form class="space-y-4 md:space-y-6" wire:submit.prevent="login" action="#">
+
+                    @if (session('alert'))
+                        <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title']">
+
+                            {{ session('alert')['message'] }}
+
+                        </x-utils.alert>
+                    @endif
+
+                    <form class="space-y-4 md:space-y-6" action="/login" method="post">
+                        @csrf
                         <div>
                             <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                 Email

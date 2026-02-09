@@ -46,14 +46,14 @@
 
             <div class="flex items-center lg:space-x-2">
 
-                @if (!auth())
+                @auth
                     <button id="myCartDropdownButton1" data-dropdown-toggle="myCartDropdown1" type="button"
                         class="inline-flex items-center justify-center rounded-lg p-2 text-sm font-medium leading-none text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <span class="sr-only">
                             Keranjang
                         </span>
-                        <svg class="h-5 w-5 lg:me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="h-5 w-5 lg:me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
                         </svg>
@@ -237,10 +237,15 @@
                                     Alamat Pengiriman </a></li>
                         </ul>
 
-                        <div class="p-2 text-sm font-medium text-gray-900 dark:text-white">
-                            <a href="#" title=""
-                                class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                Logout </a>
+                        <div class="t p-2 text-sm font-medium text-red-500 dark:text-white">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <button type="submit"
+                                    class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-red-100 dark:hover:bg-red-600">
+                                    Logout
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -264,7 +269,7 @@
                             <a href="{{ route('login') }}" class="font-bold text-green-500">Login </a>
                         </p>
                     </div>
-                @endif
+                @endauth
             </div>
         </div>
 
