@@ -10,6 +10,55 @@ new class extends Component {
     {
         $this->product = Product::find($id);
     }
+
+    public function addToFavorite($id)
+    {
+        // check apakah sudah auth
+        if (!auth()->check()) {
+            return $this->redirect(route('login'));
+        }
+
+        // check apakah sudah difavorit
+        $fav = \App\Models\ProductFavorite::where('user_id', auth()->user()->id)
+            ->where('product_id', $id)
+            ->first();
+
+        // kalo sudah difavorit
+        if ($fav) {
+            // hapus
+            $fav->delete($id);
+        } else {
+            \App\Models\ProductFavorite::create([
+                'user_id' => auth()->user()->id,
+                'product_id' => $id,
+            ]);
+        }
+    }
+
+    public function addToCart($id)
+    {
+        // check apakah sudah auth
+        if (!auth()->check()) {
+            return $this->redirect(route('login'));
+        }
+
+        // check apakah udah dicart
+        $cart = \App\Models\CustomerCartItem::where('user_id', auth()->user()->id)
+            ->where('product_id', $id)
+            ->first();
+
+        if ($cart) {
+            $cart->increment('quantity');
+        } else {
+            \App\Models\CustomerCartItem::create([
+                'user_id' => auth()->user()->id,
+                'product_id' => $id,
+                'quantity' => 1,
+            ]);
+        }
+
+        dd('berhasil menambahkan item kedalam cart');
+    }
 };
 ?>
 
@@ -80,30 +129,44 @@ new class extends Component {
 
                     <p class="mt-6 flex text-blue-700">
                         <x-icons.pin-map class="me-2 h-6 w-6 text-blue-700" />
-
                         Antar ke Alamatmu
                     </p>
 
                     <div class="mt-6 sm:flex sm:items-center sm:gap-4">
-                        <a href="#" title=""
-                            class="flex items-center justify-center rounded-lg border border-pink-200 bg-white px-5 py-2.5 text-sm font-medium text-pink-900 hover:bg-pink-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-pink-100 dark:border-pink-600 dark:bg-pink-800 dark:text-pink-400 dark:hover:bg-pink-700 dark:hover:text-white dark:focus:ring-pink-700"
-                            role="button">
-                            <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                            </svg>
-                            Tambah ke Favorit
-                        </a>
+                        <button type="button"
+                            class="bg-pink shadow-xs rounded-base box-border flex items-center gap-x-2 border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white hover:bg-pink-600 focus:outline-none focus:ring-4 focus:ring-pink-700"
+                            wire:click.prevent="addToFavorite('{{ $product->id }}')">
+                            @if (auth()->check() && auth()->user()->favoriteProducts->contains($product->id))
+                                <svg class="h-6 w-6 fill-red-700 text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                                </svg>
 
-                        <a href="#" title=""
+                                <span>Tersimpan</span>
+                            @else
+                                <svg class="h-6 w-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                                </svg>
+
+                                <span>Simpan </span>
+                            @endif
+
+
+                        </button>
+
+                        <button wire:click="addToCart({{ $product->id }})"
                             class="mt-4 flex items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-gray-200 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:mt-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             role="button">
 
                             <x-icons.cart class="-ms-2 me-2 h-5 w-5" />
                             Tambah ke Keranjang
-                        </a>
+                        </button>
                     </div>
 
                     <hr class="my-6 border-gray-200 md:my-8 dark:border-gray-800" />

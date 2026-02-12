@@ -55,6 +55,16 @@ class User extends Authenticatable
         return $this->hasMany(ProductReview::class, 'user_id', 'id');
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(ProductFavorite::class, 'user_id', 'id');
+    }
+
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'product_favorite', 'user_id', 'product_id');
+    }
+
     /**
      * Get the user's initials
      */

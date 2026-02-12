@@ -12,10 +12,12 @@
     @livewireStyles
 </head>
 
-<body class="bg-gray-50">
+<body class="flex min-h-screen flex-col bg-gray-50">
     @include('layouts.app.navbar')
 
-    {{ $slot }}
+    <div class="flex-1">
+        {{ $slot }}
+    </div>
 
     @include('layouts.app.footer')
 
