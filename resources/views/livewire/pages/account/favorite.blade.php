@@ -1,52 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component {
-    public function mount()
-    {
-        if (!auth()->check()) {
-            return $this->redirect(route('login'));
-        }
-    }
-
-    public function getProductsProperty()
-    {
-        return \App\Models\Product::whereHas('favorites', function ($q) {
-            $q->where('user_id', auth()->id());
-        })
-            ->with(['category', 'reviews'])
-            ->get();
-    }
-
-    public function addToFavorite($id)
-    {
-        // check apakah sudah auth
-        if (!auth()->check()) {
-            return $this->redirect(route('login'));
-        }
-
-        // check apakah sudah difavorit
-        $fav = \App\Models\ProductFavorite::where('user_id', auth()->user()->id)
-            ->where('product_id', $id)
-            ->first();
-
-        // kalo sudah difavorit
-        if ($fav) {
-            // hapus
-            $fav->delete($id);
-        } else {
-            \App\Models\ProductFavorite::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $id,
-            ]);
-        }
-
-        $this->dispatch('$refresh');
-    }
-};
-?>
-
 <div class="mx-auto w-full max-w-screen-xl p-4 lg:p-8">
     <section class="bg-gray-50 py-8 antialiased md:py-12 dark:bg-gray-900">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -64,13 +15,13 @@ new class extends Component {
 
                 @forelse ($this->products as $row)
                     <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
-                        <a href="{{ route('product.item', $row->id) }}">
+                        <a href="{{ route('product.detail', $row->id) }}">
                             <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                                 src="{{ asset('storage/' . $row->product_image_primary) }}" alt="Oli MPX">
                         </a>
                         <div class="p-5">
                             <h3 class="text-xl font-bold text-blue-600">
-                                <a href="{{ route('product.item', $row->id) }}">{{ $row->product_name }}</a>
+                                <a href="{{ route('product.detail', $row->id) }}">{{ $row->product_name }}</a>
                             </h3>
 
                             <span class="mb-4 font-semibold text-gray-500 dark:text-gray-400">

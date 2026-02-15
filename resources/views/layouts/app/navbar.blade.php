@@ -23,19 +23,19 @@
                         </a>
                     </li>
                     <li class="shrink-0">
-                        <a href="#" title=""
+                        <a href="{{ route('best-seller') }}" title=""
                             class="flex text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
                             Paling Laku
                         </a>
                     </li>
-                    <li class="shrink-0">
+                    {{-- <li class="shrink-0">
                         <a href="#" title=""
                             class="flex text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
                             Sparepart Motor & Mobil
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="shrink-0">
-                        <a href="#" title=""
+                        <a href="{{ route('today-promo') }}" title=""
                             class="text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
                             Promo Hari Ini
                         </a>

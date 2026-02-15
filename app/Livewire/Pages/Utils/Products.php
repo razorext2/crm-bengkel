@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Landing;
+namespace App\Livewire\Pages\Utils;
 
 use App\Models\Product;
 use App\Models\ProductFavorite;
@@ -33,7 +33,7 @@ class Products extends Component
 
     public function render()
     {
-        return view('livewire.landing.products',
+        return view('livewire.pages.utils.products',
             [
                 'products' => Product::paginate(16, pageName: 'product-page'),
             ]);

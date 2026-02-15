@@ -1,17 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component {
-    public $categories;
-
-    public function mount()
-    {
-        $this->categories = \App\Models\ProductCategory::all();
-    }
-};
-?>
-
 <div class="mx-auto flex max-w-screen-xl flex-col gap-2 p-4 lg:gap-4 lg:p-8">
 
     <h2 class="mb-2 text-4xl font-extrabold text-gray-900 dark:text-white">Kategori</h2>

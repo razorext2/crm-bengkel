@@ -6,13 +6,13 @@
 
         @forelse ($products as $row)
             <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
-                <a href="{{ route('product.item', $row->id) }}">
+                <a href="{{ route('product.detail', $row->id) }}">
                     <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                         src="{{ asset('storage/' . $row->product_image_primary) }}" alt="Oli MPX">
                 </a>
                 <div class="p-5">
                     <h3 class="text-xl font-bold text-blue-600">
-                        <a href="{{ route('product.item', $row->id) }}">{{ $row->product_name }}</a>
+                        <a href="{{ route('product.detail', $row->id) }}">{{ $row->product_name }}</a>
                     </h3>
 
                     <span class="mb-4 font-semibold text-gray-500 dark:text-gray-400">

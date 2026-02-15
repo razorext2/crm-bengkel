@@ -1,12 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component {
-    //
-};
-?>
-
 <div class="mx-auto w-full max-w-screen-xl p-4 lg:p-8">
     @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Pengaturan'])
 

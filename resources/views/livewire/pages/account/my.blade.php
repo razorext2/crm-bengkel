@@ -1,12 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component {
-    //
-};
-?>
-
 <div class="mx-auto w-full max-w-screen-xl p-4 lg:p-8">
     @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Profil Saya'])
 
@@ -31,15 +22,15 @@ new class extends Component {
             <div id="quick-access" class="grid grid-cols-3 gap-x-2 lg:gap-x-4">
 
                 <a href="#" class="flex w-full items-center justify-center rounded-md bg-green-500 p-2 lg:p-4">
-                    <x-icon.gear class="h-4 w-4 text-green-700" />
+                    <x-icons.gear class="h-4 w-4 text-green-700" />
                 </a>
 
                 <a href="#" class="flex w-full items-center justify-center rounded-md bg-green-500 p-2 lg:p-4">
-                    <x-icon.gear class="h-4 w-4 text-green-700" />
+                    <x-icons.gear class="h-4 w-4 text-green-700" />
                 </a>
 
                 <a href="#" class="flex w-full items-center justify-center rounded-md bg-green-500 p-2 lg:p-4">
-                    <x-icon.gear class="h-4 w-4 text-green-700" />
+                    <x-icons.gear class="h-4 w-4 text-green-700" />
                 </a>
 
             </div>
@@ -48,26 +39,26 @@ new class extends Component {
                 <li>
                     <a href="{{ route('account.order') }}"
                         class="flex items-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-icon.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
+                        <x-icons.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
                         <span>Pesanan Saya</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" class="flex items-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-icon.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
+                        <x-icons.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
                         <span>Penilaian Saya</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" class="flex items-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-icon.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
+                        <x-icons.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
                         <span>Alamat</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('account.favorite') }}"
                         class="flex items-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-icon.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
+                        <x-icons.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
                         <span>Favorit</span>
                     </a>
                 </li>
@@ -77,14 +68,14 @@ new class extends Component {
                 <li>
                     <a href="{{ route('account.settings') }}"
                         class="flex items-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-icon.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
+                        <x-icons.gear class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
                         <span>Pengaturan</span>
                     </a>
                 </li>
                 <li>
                     <a href="/logout"
                         class="flex items-center rounded-md p-2 text-red-500 hover:bg-red-100 dark:hover:bg-red-700">
-                        <x-icon.gear class="me-2 h-4 w-4 shrink-0" />
+                        <x-icons.gear class="me-2 h-4 w-4 shrink-0" />
                         <span>Logout</span>
                     </a>
                 </li>
