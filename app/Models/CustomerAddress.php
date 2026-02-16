@@ -17,7 +17,7 @@ class CustomerAddress extends Model
         'postal_code',
         'address_detail',
         'receiver_name',
-        'receiver)phone',
+        'receiver_phone',
     ];
 
     public function user()

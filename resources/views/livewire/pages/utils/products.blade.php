@@ -45,29 +45,29 @@
                         {{ $row->category->category_name }}</p>
 
                     <div class="mt-4 flex flex-col justify-center gap-2 lg:flex-row">
-                        <button type="button"
-                            class="bg-brand hover:bg-brand-strong focus:ring-brand-medium shadow-xs rounded-base box-border border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white focus:outline-none focus:ring-4">
-                            Checkout
+                        <button wire:click="addToCart('{{ $row->id }}')" type="button"
+                            class="bg-brand hover:bg-brand-strong focus:ring-brand-medium shadow-xs rounded-base box-border cursor-pointer border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white focus:outline-none focus:ring-4">
+                            Keranjang
                         </button>
 
                         <button type="button"
-                            class="bg-pink shadow-xs rounded-base box-border flex items-center gap-x-2 border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white hover:bg-pink-600 focus:outline-none focus:ring-4 focus:ring-pink-700"
+                            class="bg-pink shadow-xs rounded-base box-border flex cursor-pointer items-center gap-x-1 border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white hover:bg-pink-600 focus:outline-none focus:ring-4 focus:ring-pink-700"
                             wire:click.prevent="addToFavorite('{{ $row->id }}')">
                             @if (auth()->check() && auth()->user()->favoriteProducts->contains($row->id))
-                                <svg class="h-6 w-6 fill-red-700 text-white" aria-hidden="true"
+                                <svg class="h-4 w-4 fill-red-700 text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
+                                        stroke-width="1"
                                         d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                 </svg>
 
                                 <span>Tersimpan</span>
                             @else
-                                <svg class="h-6 w-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                <svg class="h-4 w-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
+                                        stroke-width="1"
                                         d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                 </svg>
 

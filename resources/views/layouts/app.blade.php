@@ -12,7 +12,7 @@
     @livewireStyles
 </head>
 
-<body class="flex min-h-screen flex-col bg-gray-50">
+<body class="relative flex min-h-screen flex-col bg-gray-50">
     @include('layouts.app.navbar')
 
     <div class="flex-1">

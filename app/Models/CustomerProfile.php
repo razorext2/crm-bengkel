@@ -13,10 +13,16 @@ class CustomerProfile extends Model
         'phone_number',
         'profile_photo',
         'points',
+        'primary_address_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function primaryAddress()
+    {
+        return $this->belongsTo(CustomerAddress::class, 'primary_address_id', 'id');
     }
 }

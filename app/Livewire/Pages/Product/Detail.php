@@ -60,7 +60,11 @@ class Detail extends Component
             ]);
         }
 
-        dd('berhasil menambahkan item kedalam cart');
+        session()->flash('alert', [
+            'type' => 'green',
+            'title' => 'Berhasil',
+            'message' => 'Produk berhasil ditambahkan ke keranjang',
+        ]);
     }
 
     public function render()

@@ -1,6 +1,12 @@
 <div class="mx-auto max-w-screen-xl p-4 lg:p-8">
     @livewire('utils.breadcumb', ['page' => $product->category->category_name, 'subpage' => $product->product_name])
 
+    @if (session('alert'))
+        <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
+            {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
+        </x-utils.alert>
+    @endif
+
     <section class="rounded-lg bg-white py-8 antialiased shadow-lg md:py-16 dark:bg-gray-900">
         <div class="mx-auto px-4">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">

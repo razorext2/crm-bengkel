@@ -1,6 +1,12 @@
 <div class="mx-auto min-h-max w-full max-w-screen-xl p-4 lg:p-8">
     @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Pesanan Saya'])
 
+    @if (session('alert'))
+        <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
+            {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
+        </x-utils.alert>
+    @endif
+
     <section
         class="rounded-lg border border-gray-200 bg-white p-2 antialiased shadow-md md:py-16 lg:p-4 dark:bg-gray-900">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -12,53 +18,74 @@
                 <div class="mt-6 flow-root sm:mt-8">
                     <div class="divide-y divide-gray-200 dark:divide-gray-700">
 
-                        <div class="flex flex-wrap items-center gap-y-4 py-6">
-                            <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Order ID:</dt>
-                                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                                    <a href="#" class="hover:underline">#FWB127364372</a>
-                                </dd>
-                            </dl>
+                        @forelse ($transactions as $row)
+                            <div class="flex flex-wrap items-center gap-y-4 py-6">
+                                <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">
+                                        Kode Transaksi:
+                                    </dt>
+                                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                                        <a href="#" class="hover:underline">#{{ $row->invoice_number }}</a>
+                                    </dd>
+                                </dl>
 
-                            <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Date:</dt>
-                                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">20.12.2023
-                                </dd>
-                            </dl>
+                                <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Tanggal:</dt>
+                                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                                        {{ Carbon\Carbon::parse($row->created_at)->format('d M Y') }}
+                                    </dd>
+                                </dl>
 
-                            <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Price:</dt>
-                                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">$4,756</dd>
-                            </dl>
+                                <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Total Harga:</dt>
+                                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                                        Rp. {{ number_format($row->total_amount, 0, ',', '.') }}</dd>
+                                </dl>
 
-                            <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Status:</dt>
-                                <dd
-                                    class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                                    <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
-                                    </svg>
-                                    Pre-order
-                                </dd>
-                            </dl>
+                                <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
+                                    @php
+                                        $statusColors = [
+                                            0 => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+                                            1 => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+                                            2 => 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+                                            3 => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+                                            4 => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
+                                        ];
+                                    @endphp
 
-                            <div
-                                class="grid w-full gap-4 sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end">
-                                <button type="button"
-                                    class="w-full rounded-lg border border-red-700 px-3 py-2 text-center text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 lg:w-auto dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900">Cancel
-                                    order</button>
-                                <a href="#"
-                                    class="inline-flex w-full justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 lg:w-auto dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">View
-                                    details</a>
+                                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Status:</dt>
+                                    <dd
+                                        class="{{ $statusColors[$row->order_status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} me-2 mt-1.5 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
+                                        {{ $row->order_status_description['description'] }}
+                                    </dd>
+                                </dl>
+
+                                <div
+                                    class="grid w-full gap-4 sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end">
+                                    @if ($row->order_status != 4)
+                                        <button type="button"
+                                            wire:confirm.prompt="Apakah kamu yakin ingin membatalkan transaksi ini?\nKetik BATAL jika kamu yakin.|BATAL"
+                                            wire:click.prevent="cancelTransaction({{ $row->id }})"
+                                            class="w-full cursor-pointer rounded-lg border border-red-700 px-3 py-2 text-center text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 lg:w-auto dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900">
+                                            Batalkan Pesanan
+                                        </button>
+                                    @endif
+
+                                    <a href="{{ route('account.order.detail', $row->id) }}"
+                                        class="inline-flex w-full justify-center rounded-lg border border-blue-200 bg-white px-3 py-2 text-sm font-medium text-blue-900 hover:bg-blue-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-blue-100 lg:w-auto dark:border-blue-600 dark:bg-blue-800 dark:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white dark:focus:ring-blue-700">
+                                        Lihat Detail
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        @empty
+                            <p class="text-md text-center font-semibold">
+                                Belum ada transaksi yang dilakukan.
+                            </p>
+                        @endforelse
 
                     </div>
 
-                    {{-- navigasi nanti disini --}}
+                    {{ $transactions->links() }}
                 </div>
             </div>
     </section>

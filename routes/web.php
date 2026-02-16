@@ -18,15 +18,25 @@ Route::prefix('product')
         Route::livewire('/product/{id}', 'pages.product.detail')->name('detail');
     });
 
-Route::prefix('account')
-    ->middleware('auth')
-    ->name('account.')
-    ->group(function () {
-        // Route::livewire('/me', 'pages::account.me')->name('me');
-        Route::livewire('/my', 'pages.account.my')->name('me');
-        Route::livewire('/orders', 'pages.account.orders')->name('order');
-        Route::livewire('/settings', 'pages.account.setting')->name('settings');
-        Route::livewire('/favorite', 'pages.account.favorite')->name('favorite');
-    });
+Route::middleware('auth')->name('')->group(function () {
+    Route::prefix('account')
+        ->name('account.')
+        ->group(function () {
+            // Route::livewire('/me', 'pages::account.me')->name('me');
+            Route::livewire('/my', 'pages.account.my')->name('me');
+            Route::livewire('/orders', 'pages.account.orders')->name('order');
+            Route::livewire('/order/{id}', 'pages.account.order-detail')->name('order.detail');
+            Route::livewire('/settings', 'pages.account.setting')->name('settings');
+            Route::livewire('/favorite', 'pages.account.favorite')->name('favorite');
+            Route::livewire('/addresses', 'pages.account.addresses')->name('addresses');
+        });
+
+    // untuk checkout
+    Route::prefix('checkout')
+        ->name('checkout.')
+        ->group(function () {
+            Route::livewire('/', 'pages.handler.checkout')->name('index');
+        });
+});
 
 // require __DIR__.'/settings.php';

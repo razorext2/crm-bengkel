@@ -23,4 +23,39 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function transactionDetail()
+    {
+        return $this->hasMany(TransactionDetail::class, 'transaction_id', 'id');
+    }
+
+    public function getOrderStatusDescriptionAttribute()
+    {
+        return match ($this->order_status) {
+            0 => [
+                'value' => 'pending',
+                'description' => 'Menunggu Pembayaran',
+            ],
+            1 => [
+                'value' => 'paid',
+                'description' => 'Pembayaran Diterima',
+            ],
+            2 => [
+                'value' => 'shipped',
+                'description' => 'Pesanan Dikirim',
+            ],
+            3 => [
+                'value' => 'delivered',
+                'description' => 'Pesanan Diterima',
+            ],
+            4 => [
+                'value' => 'cancelled',
+                'description' => 'Pesanan Dibatalkan',
+            ],
+            default => [
+                'value' => null,
+                'description' => 'Status Tidak Diketahui',
+            ],
+        };
+    }
 }

@@ -85,7 +85,7 @@
                             <li><a href="{{ route('account.favorite') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                     Favorit </a></li>
-                            <li><a href="#" title=""
+                            <li><a href="{{ route('account.addresses') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                     Alamat Pengiriman </a></li>
                         </ul>

@@ -50,6 +50,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function profile()
+    {
+        return $this->belongsTo(CustomerProfile::class, 'id', 'user_id');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
+
     public function review()
     {
         return $this->hasMany(ProductReview::class, 'user_id', 'id');
@@ -63,6 +73,11 @@ class User extends Authenticatable
     public function favoriteProducts()
     {
         return $this->belongsToMany(Product::class, 'product_favorite', 'user_id', 'product_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(CustomerAddress::class, 'user_id', 'id');
     }
 
     /**

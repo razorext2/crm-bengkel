@@ -1,6 +1,6 @@
-@props(['color' => 'success', 'title' => null])
+@props(['color' => 'success', 'title' => null, 'class' => null])
 
-<div class="text-{{ $color }}-200 rounded-base bg-{{ $color }}-500 mb-4 flex items-start p-4 text-sm sm:items-center"
+<div class="text-{{ $color }}-200 rounded-base bg-{{ $color }}-500 {{ $class }} mb-4 flex items-start p-4 text-sm sm:items-center"
     role="alert">
     <svg class="me-2 mt-0.5 h-4 w-4 shrink-0 sm:mt-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" fill="none" viewBox="0 0 24 24">

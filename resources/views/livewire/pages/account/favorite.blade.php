@@ -12,7 +12,6 @@
             </div>
             <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
 
-
                 @forelse ($this->products as $row)
                     <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
                         <a href="{{ route('product.detail', $row->id) }}">
