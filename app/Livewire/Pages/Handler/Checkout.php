@@ -25,7 +25,9 @@ class Checkout extends Component
 
         $userAddress = auth()->user()->addresses()->first();
 
-        $this->deliveryAddress = $userAddress->address_detail.', '.$userAddress->city.', '.$userAddress->province.', '.$userAddress->country.', '.$userAddress->postal_code;
+        if ($userAddress) {
+            $this->deliveryAddress = $userAddress->address_detail.', '.$userAddress->city.', '.$userAddress->province.', '.$userAddress->country.', '.$userAddress->postal_code;
+        }
     }
 
     public function processToCheckout()

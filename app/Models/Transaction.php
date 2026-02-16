@@ -14,10 +14,18 @@ class Transaction extends Model
         'total_amount',
         'resi_number',
         'order_status',
+        'shipping_service',
         'shipping_cost',
         'payment_proof',
         'description',
     ];
+
+    public function casts()
+    {
+        return [
+            'payment_proof' => 'array',
+        ];
+    }
 
     public function user()
     {

@@ -29,8 +29,11 @@
                                 {{ auth()->user()->profile?->primaryAddress->address_name ?? 'Belum ada alamat' }}
                             </dt>
                             <dd class="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">
-                                {{ auth()->user()->profile?->primaryAddress->receiver_name }} -
-                                {{ auth()->user()->profile?->primaryAddress->receiver_phone }}, {{ $deliveryAddress }}
+                                @if (auth()->user()->profile?->primaryAddress)
+                                    {{ auth()->user()->profile?->primaryAddress->receiver_name }} -
+                                    {{ auth()->user()->profile?->primaryAddress->receiver_phone }},
+                                    {{ $deliveryAddress }}
+                                @endif
                             </dd>
                         </dl>
 

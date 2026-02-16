@@ -27,7 +27,7 @@
                     class="mb-2 flex items-center gap-x-2 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                     {{ $row->address_name ?? 'N/A' }}
 
-                    @if (auth()->user()->profile?->primaryAddress->id === $row->id)
+                    @if (auth()->user()->profile?->primaryAddress?->id === $row->id)
                         <span class="rounded bg-gray-200 px-2 py-0.5 text-xs">Utama</span>
                     @endif
                 </h2>
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="flex justify-end gap-x-2">
-                    @if (auth()->user()->profile?->primaryAddress->id != $row->id)
+                    @if (auth()->user()->profile?->primaryAddress?->id != $row->id)
                         <x-button.primary wire:click="makePrimary({{ $row->id }})" class="text-sm">
                             Jadikan Alamat Utama
                         </x-button.primary>
