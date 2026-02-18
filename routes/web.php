@@ -60,6 +60,11 @@ Route::middleware('auth')
                 Route::view('/category', 'dashboard.category.index')->name('category.index');
                 Route::view('/category/create', 'dashboard.category.create')->name('category.create');
                 Route::view('/category/edit/{id}', 'dashboard.category.edit')->name('category.edit');
+
+                // produk
+                Route::view('/product', 'dashboard.product.index')->name('product.index');
+                Route::view('/product/create', 'dashboard.product.create')->name('product.create');
+                Route::view('/product/edit/{id}', 'dashboard.product.edit')->name('product.edit');
             });
     });
 

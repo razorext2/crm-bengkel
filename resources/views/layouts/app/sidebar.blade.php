@@ -24,6 +24,11 @@
                     :current="request()->routeIs('category.index')" wire:navigate>
                     Kategori
                 </flux:sidebar.item>
+
+                <flux:sidebar.item icon="building-storefront" :href="route('product.index')"
+                    :current="request()->routeIs('product.index')" wire:navigate>
+                    Produk
+                </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 
