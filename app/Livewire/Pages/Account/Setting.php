@@ -8,6 +8,7 @@ use App\Models\CustomerProfile;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -69,6 +70,7 @@ class Setting extends Component
         ]);
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         return view('livewire.pages.account.setting');

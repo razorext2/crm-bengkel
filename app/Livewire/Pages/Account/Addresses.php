@@ -6,6 +6,7 @@ use App\Livewire\Concerns\HandlesErrors;
 use App\Livewire\Forms\Address;
 use App\Models\CustomerAddress;
 use App\Models\CustomerProfile;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Addresses extends Component
@@ -95,6 +96,7 @@ class Addresses extends Component
         ]);
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         $addresses = CustomerAddress::with('user')

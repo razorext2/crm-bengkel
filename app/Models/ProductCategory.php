@@ -18,4 +18,9 @@ class ProductCategory extends Model
     protected $casts = [
         'category_image' => 'array',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
 }

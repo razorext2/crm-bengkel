@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Product;
 
 use App\Models\Product;
 use App\Models\ProductFavorite;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Detail extends Component
@@ -80,6 +81,7 @@ class Detail extends Component
         ]);
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         return view('livewire.pages.product.detail');

@@ -79,17 +79,17 @@ class Attachment extends Form
         return $this->new_attachments = array_values($this->new_attachments);
     }
 
-    public function storeAttachment()
+    public function storeAttachment($directory = 'proof', $disk = 'local')
     {
         foreach ($this->new_attachments as $index => $attachment) {
-            $path = 'proof/';
-            $name = Str::uuid().'.'.$attachment['ext'];
+            $path = $directory.'/';
+            $name = Str::ulid().'.'.$attachment['ext'];
 
             if (isset($attachment['file'])) {
                 $attachment['file']->storeAs(
                     path: $path,
                     name: $name,
-                    options: 'local'
+                    options: $disk
                 );
             }
 

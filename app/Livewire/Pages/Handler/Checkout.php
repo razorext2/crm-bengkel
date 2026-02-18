@@ -7,6 +7,7 @@ use App\Models\CustomerCartItem;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Checkout extends Component
@@ -84,6 +85,7 @@ class Checkout extends Component
         ]);
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         return view('livewire.pages.handler.checkout');

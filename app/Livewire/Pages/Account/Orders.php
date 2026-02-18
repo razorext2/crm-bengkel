@@ -3,13 +3,12 @@
 namespace App\Livewire\Pages\Account;
 
 use App\Livewire\Concerns\HandlesErrors;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Orders extends Component
 {
     use HandlesErrors;
-
-    public function mount() {}
 
     public function cancelTransaction($id)
     {
@@ -31,6 +30,7 @@ class Orders extends Component
         ]);
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         $transactions = \App\Models\Transaction::where('user_id', auth()->id())

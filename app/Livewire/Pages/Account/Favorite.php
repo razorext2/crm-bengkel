@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Account;
 
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Favorite extends Component
@@ -60,6 +61,7 @@ class Favorite extends Component
         $this->dispatch('$refresh');
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         return view('livewire.pages.account.favorite');

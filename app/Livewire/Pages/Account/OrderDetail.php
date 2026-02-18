@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Account;
 
 use App\Livewire\Concerns\HandlesErrors;
 use App\Livewire\Forms\Attachment;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -64,6 +65,7 @@ class OrderDetail extends Component
         ]);
     }
 
+    #[Layout('layouts.app-customer')]
     public function render()
     {
         return view('livewire.pages.account.order-detail');
