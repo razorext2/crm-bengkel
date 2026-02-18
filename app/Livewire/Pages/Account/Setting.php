@@ -57,10 +57,10 @@ class Setting extends Component
 
             });
 
-            session()->flash('alert', [
-                'type' => 'green',
+            $this->dispatch('swal', [
+                'icon' => 'success',
                 'title' => 'Berhasil!',
-                'message' => 'Data profil berhasil diperbarui.',
+                'text' => 'Data profil berhasil diperbarui.',
             ]);
 
         }, 'Gagal memperbarui data profil. Silakan coba lagi.', [

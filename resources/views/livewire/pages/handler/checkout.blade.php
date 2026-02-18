@@ -10,12 +10,6 @@
                 </div>
             </div>
 
-            @if (session('alert'))
-                <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
-                    {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
-                </x-utils.alert>
-            @endif
-
             <section class="rounded-lg bg-white p-8 antialiased shadow lg:p-16 dark:bg-gray-900">
                 <form wire:submit.prevent="processToCheckout" class="mx-auto w-full px-4 2xl:px-0">
 

@@ -7,11 +7,6 @@
     </div>
 
     <section class="rounded-lg bg-white p-8 antialiased shadow dark:bg-gray-900">
-        @if (session('alert'))
-            <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
-                {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
-            </x-utils.alert>
-        @endif
 
         <div class="flex w-full items-center justify-end space-x-4">
             <button type="button"

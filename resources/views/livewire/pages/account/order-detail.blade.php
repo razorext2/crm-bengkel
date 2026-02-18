@@ -1,12 +1,6 @@
 <div class="mx-auto min-h-max w-full max-w-screen-xl p-4 lg:p-8">
     @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Pesanan Saya'])
 
-    @if (session('alert'))
-        <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
-            {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
-        </x-utils.alert>
-    @endif
-
     <section
         class="rounded-lg border border-gray-200 bg-white p-2 antialiased shadow-md md:py-16 lg:p-4 dark:bg-gray-900">
         <div class="mx-auto max-w-screen-xl p-8">
@@ -30,18 +24,25 @@
                     class="{{ $statusColors[$data->order_status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} me-2 mt-1.5 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
                     {{ $data->order_status_description['description'] }}
                 </dd>
+                @if ($data->order_status == 0 && $data->payment_proof)
+                    <dd
+                        class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                        Menunggu Verifikasi
+                    </dd>
+                @endif
             </h2>
 
             <div
                 class="mb-6 space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 sm:space-y-2 md:mb-8 dark:border-gray-700 dark:bg-gray-800">
-                <dl class="items-center justify-between gap-4 sm:flex">
+                <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Tanggal</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
                         {{ \Carbon\Carbon::parse($data->created_at)->locale('id')->format('d-m-Y H:m:s') }}
                     </dd>
                 </dl>
-                <dl class="items-center justify-between gap-4 sm:flex">
-                    <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Bukti Pembayaran</dt>
+                <dl class="items-start justify-between gap-4 sm:flex">
+                    <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Bukti Pembayaran
+                    </dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
                         @if (empty($data->payment_proof))
                             <span class="text-red-500">Belum ada bukti pembayaran</span>
@@ -50,16 +51,22 @@
                                 Upload Bukti Pembayaran
                             </x-button.primary>
                         @else
+                            <div class="flex gap-x-2">
+                                @foreach ($data->payment_proof as $proof)
+                                    <img id="img" data-url="{{ route('file.stream', ['path' => $proof['url']]) }}"
+                                        src="{{ route('file.stream', ['path' => $proof['url']]) }}" class="w-16">
+                                @endforeach
+                            </div>
                         @endif
                     </dd>
                 </dl>
-                <dl class="items-center justify-between gap-4 sm:flex">
+                <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Nama Penerima</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
                         {{ auth()->user()->profile->primaryAddress->receiver_name }}
                     </dd>
                 </dl>
-                <dl class="items-center justify-between gap-4 sm:flex">
+                <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Alamat</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
                         {{ auth()->user()->profile?->primaryAddress?->address_name }}
@@ -70,13 +77,13 @@
                         {{ auth()->user()->profile?->primaryAddress?->postal_code }})
                     </dd>
                 </dl>
-                <dl class="items-center justify-between gap-4 sm:flex">
+                <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Jasa Kirim</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
 
                     </dd>
                 </dl>
-                <dl class="items-center justify-between gap-4 sm:flex">
+                <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Telepon Penerima</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
                         {{ auth()->user()->profile->primaryAddress->receiver_phone }}
@@ -209,12 +216,6 @@
                     </div>
                     <!-- Modal body -->
                     <div class="space-y-4 py-4 md:space-y-6 md:py-6">
-
-                        @if (session('alert'))
-                            <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
-                                {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
-                            </x-utils.alert>
-                        @endif
 
                         <div x-show="$wire.docForm.new_attachments.length > 0">
                             <span class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">

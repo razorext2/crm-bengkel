@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
+use Illuminate\Support\Facades\Storage;
 
 Route::livewire('/', 'pages.home')->name('home');
 
@@ -19,6 +16,18 @@ Route::prefix('product')
     });
 
 Route::middleware('auth')->name('')->group(function () {
+    // untuk file
+    Route::get('/file/{path}', function ($path) {
+        abort_unless(
+            Storage::disk('local')->exists($path),
+            404
+        );
+
+        return Storage::disk('local')->response($path);
+    })
+        ->where('path', '.*')
+        ->name('file.stream');
+
     Route::prefix('account')
         ->name('account.')
         ->group(function () {

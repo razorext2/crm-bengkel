@@ -92,12 +92,6 @@
                     <!-- Modal body -->
                     <div class="space-y-4 py-4 md:space-y-6 md:py-6">
 
-                        @if (session('alert'))
-                            <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
-                                {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
-                            </x-utils.alert>
-                        @endif
-
                         <x-input.basic id="name" label="Nama Anda" placeholder="Ketik nama Anda..." type="text"
                             wire:model="form.name" errorName="form.name" />
 

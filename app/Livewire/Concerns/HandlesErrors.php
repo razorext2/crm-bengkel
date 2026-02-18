@@ -16,19 +16,19 @@ trait HandlesErrors
             // error bisnis yang akan dilihat user
             $this->addError('general', $e->getMessage());
 
-            session()->flash('alert', [
-                'type' => 'red',
+            $this->dispatch('swal', [
+                'icon' => 'error',
                 'title' => 'Gagal!',
-                'message' => $e->getMessage(),
+                'text' => $e->getMessage(),
             ]);
         } catch (Throwable $e) {
             // error teknis, kasih pesan umum aja
             $errorId = ErrorLogger::log($e, $logMessage, $context);
 
-            session()->flash('alert', [
-                'type' => 'red',
+            $this->dispatch('swal', [
+                'icon' => 'error',
                 'title' => 'Gagal!',
-                'message' => 'Terjadi kesalahan sistem. Kode: '.$errorId,
+                'text' => 'Terjadi kesalahan sistem. Kode: '.$errorId,
             ]);
         }
     }

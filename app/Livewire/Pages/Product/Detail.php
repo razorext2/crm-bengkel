@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Product;
 
 use App\Models\Product;
+use App\Models\ProductFavorite;
 use Livewire\Component;
 
 class Detail extends Component
@@ -22,7 +23,7 @@ class Detail extends Component
         }
 
         // check apakah sudah difavorit
-        $fav = \App\Models\ProductFavorite::where('user_id', auth()->user()->id)
+        $fav = ProductFavorite::where('user_id', auth()->user()->id)
             ->where('product_id', $id)
             ->first();
 
@@ -30,10 +31,22 @@ class Detail extends Component
         if ($fav) {
             // hapus
             $fav->delete($id);
+
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'text' => 'Produk berhasil dihapus dari favorit',
+            ]);
         } else {
-            \App\Models\ProductFavorite::create([
+            ProductFavorite::create([
                 'user_id' => auth()->user()->id,
                 'product_id' => $id,
+            ]);
+
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'text' => 'Produk berhasil ditambahkan ke favorit',
             ]);
         }
     }
@@ -60,10 +73,10 @@ class Detail extends Component
             ]);
         }
 
-        session()->flash('alert', [
-            'type' => 'green',
+        $this->dispatch('swal', [
+            'icon' => 'success',
             'title' => 'Berhasil',
-            'message' => 'Produk berhasil ditambahkan ke keranjang',
+            'text' => 'Produk berhasil ditambahkan ke keranjang',
         ]);
     }
 

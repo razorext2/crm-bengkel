@@ -22,10 +22,10 @@ class CartNavbar extends Component
             CustomerCartItem::findOrFail($id)
                 ->delete();
 
-            session()->flash('alert', [
-                'type' => 'green',
-                'title' => 'Berhasil!',
-                'message' => 'Produk berhasil dihapus dari keranjang.',
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil.',
+                'text' => 'Produk berhasil dihapus dari keranjang.',
             ]);
 
             $this->dispatch('$refresh');

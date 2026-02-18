@@ -51,10 +51,10 @@ class OrderDetail extends Component
                 'payment_proof' => $lampiran,
             ]);
 
-            session()->flash('alert', [
-                'type' => 'green',
+            $this->dispatch('swal', [
+                'icon' => 'success',
                 'title' => 'Berhasil.',
-                'message' => 'Bukti pembayaran berhasil diunggah.',
+                'text' => 'Bukti pembayaran berhasil diunggah.',
             ]);
 
         }, 'Gagal menyimpan bukti pembayaran.', [

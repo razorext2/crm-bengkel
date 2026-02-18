@@ -1,12 +1,6 @@
 <div class="mx-auto min-h-max w-full max-w-screen-xl p-4 lg:p-8">
     @livewire('utils.breadcumb', ['page' => 'Akun', 'subpage' => 'Pesanan Saya'])
 
-    @if (session('alert'))
-        <x-utils.alert :color="session('alert')['type']" :title="session('alert')['title'] ?? 'Gagal'">
-            {{ session('alert')['message'] ?? 'Terjadi kesalahan saat menyimpan data.' }}
-        </x-utils.alert>
-    @endif
-
     <section
         class="rounded-lg border border-gray-200 bg-white p-2 antialiased shadow-md md:py-16 lg:p-4 dark:bg-gray-900">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -58,6 +52,12 @@
                                         class="{{ $statusColors[$row->order_status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} me-2 mt-1.5 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
                                         {{ $row->order_status_description['description'] }}
                                     </dd>
+                                    @if ($row->order_status == 0 && $row->payment_proof)
+                                        <dd
+                                            class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                            Menunggu Verifikasi
+                                        </dd>
+                                    @endif
                                 </dl>
 
                                 <div

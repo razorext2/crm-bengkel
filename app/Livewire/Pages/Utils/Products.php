@@ -30,10 +30,10 @@ class Products extends Component
             ]);
         }
 
-        session()->flash('alert', [
-            'type' => 'green',
+        $this->dispatch('swal', [
+            'icon' => 'success',
             'title' => 'Berhasil',
-            'message' => 'Produk berhasil ditambahkan ke keranjang',
+            'text' => 'Produk berhasil ditambahkan ke keranjang',
         ]);
     }
 
@@ -51,13 +51,24 @@ class Products extends Component
         if ($fav) {
             // hapus
             $fav->delete($id);
+
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'text' => 'Produk berhasil dihapus dari favorit',
+            ]);
         } else {
             ProductFavorite::create([
                 'user_id' => auth()->user()->id,
                 'product_id' => $id,
             ]);
-        }
 
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'text' => 'Produk berhasil ditambahkan ke favorit',
+            ]);
+        }
     }
 
     public function render()

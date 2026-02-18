@@ -71,10 +71,10 @@ class Checkout extends Component
                 return $transaction;
             });
 
-            session()->flash('alert', [
-                'type' => 'green',
+            $this->dispatch('swal', [
+                'icon' => 'success',
                 'title' => 'Checkout Berhasil',
-                'message' => 'Pesanan Anda telah berhasil diproses. Silahkan update bukti pembayaran terlebih dahulu!',
+                'text' => 'Pesanan Anda telah berhasil diproses. Silahkan update bukti pembayaran terlebih dahulu!',
             ]);
 
             return redirect()->route('account.order.detail', $transaction->id);

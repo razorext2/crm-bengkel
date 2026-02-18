@@ -20,10 +20,10 @@ class Orders extends Component
                 ->update(['order_status' => 4]);
 
             // kasih session flash
-            session()->flash('alert', [
-                'type' => 'red',
+            $this->dispatch('swal', [
+                'icon' => 'error',
                 'title' => 'Transaksi Dibatalkan',
-                'message' => 'Berhasil membatalkan transaksi.',
+                'text' => 'Berhasil membatalkan transaksi.',
             ]);
         }, 'Gagal membatalkan transaksi.', [
             'user_id' => auth()->id(),

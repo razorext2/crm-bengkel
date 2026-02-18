@@ -50,7 +50,7 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)->first();
 
             if ($user &&
-                Hash::check($request->password, $user->password) && ($user->is_admin == false)) {
+                Hash::check($request->password, $user->password) && (! $user->is_admin)) {
                 return $user;
             }
         });

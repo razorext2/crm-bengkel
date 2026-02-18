@@ -36,10 +36,10 @@ class Addresses extends Component
             $this->form->reset();
             $this->showAddModal = false;
 
-            session()->flash('alert', [
-                'type' => 'green',
+            $this->dispatch('swal', [
+                'icon' => 'success',
                 'title' => 'Berhasil',
-                'message' => 'Alamat berhasil ditambahkan.',
+                'text' => 'Alamat berhasil ditambahkan.',
             ]);
         }, 'Gagal menambah alamat baru.', [
             'user_id' => auth()->user()->id,
@@ -51,10 +51,10 @@ class Addresses extends Component
     {
         // CEK APAKAH ALAMAT UTAMA
         if (auth()->user()->profile?->primaryAddress->id === $id) {
-            return session()->flash('alert', [
-                'type' => 'red',
+            return $this->dispatch('swal', [
+                'icon' => 'error',
                 'title' => 'Gagal',
-                'message' => 'Alamat utama tidak bisa dihapus. Silakan ganti alamat utama terlebih dahulu.',
+                'text' => 'Alamat utama tidak bisa dihapus. Silakan ganti alamat utama terlebih dahulu.',
             ]);
         }
 
@@ -65,10 +65,10 @@ class Addresses extends Component
 
             $address->delete();
 
-            session()->flash('alert', [
-                'type' => 'green',
+            $this->dispatch('swal', [
+                'icon' => 'success',
                 'title' => 'Berhasil',
-                'message' => 'Alamat berhasil dihapus.',
+                'text' => 'Alamat berhasil dihapus.',
             ]);
         }, 'Gagal menghapus alamat.', [
             'user_id' => auth()->user()->id,
@@ -84,10 +84,10 @@ class Addresses extends Component
             $profile->primary_address_id = $id;
             $profile->save();
 
-            session()->flash('alert', [
-                'type' => 'green',
+            $this->dispatch('swal', [
+                'icon' => 'success',
                 'title' => 'Berhasil',
-                'message' => 'Alamat berhasil dijadikan utama.',
+                'text' => 'Alamat berhasil dijadikan utama.',
             ]);
         }, 'Gagal menjadikan alamat utama.', [
             'user_id' => auth()->user()->id,
