@@ -28,7 +28,8 @@
             <flux:table.row>
                 <flux:table.cell class="text-center">{{ $index + 1 }}</flux:table.cell>
                 <flux:table.cell>
-                    <flux:avatar size="md" src="{{ asset('storage/' . $row->profile->profile_photo) }}" />
+                    {{-- <flux:avatar size="md" src="{{ asset('storage/' . $row->profile->profile_photo) }}" /> --}}
+                    <flux:avatar size="md" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" />
                 </flux:table.cell>
                 <flux:table.cell>{{ $row->name }}</flux:table.cell>
                 <flux:table.cell>{{ $row->email }}</flux:table.cell>

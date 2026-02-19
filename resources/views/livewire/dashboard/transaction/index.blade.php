@@ -38,12 +38,12 @@
                 </flux:table.cell>
                 <flux:table.cell class="flex flex-col gap-1">
                     <span
-                        class="{{ $this->setStatus($row->order_status) }} me-2 mt-1.5 inline-flex w-fit items-center rounded px-2.5 py-0.5 text-xs font-medium">
+                        class="{{ $this->setStatus($row->order_status) }} me-2 inline-flex w-fit items-center rounded px-2.5 py-0.5 text-xs font-medium">
                         {{ $row->order_status_description['description'] }}
                     </span>
                     @if ($row->order_status == 0 && $row->payment_proof)
                         <span
-                            class="me-2 mt-1.5 inline-flex w-fit items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                            class="me-2 inline-flex w-fit items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
                             Menunggu Verifikasi
                         </span>
                     @endif
