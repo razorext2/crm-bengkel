@@ -4,8 +4,9 @@ namespace App\Livewire\Dashboard\Product;
 
 use App\Livewire\Concerns\HandlesErrors;
 use App\Livewire\Forms\Attachment;
-use App\Livewire\Forms\Category as CategoryForm;
+use App\Livewire\Forms\Product as ProductForm;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -15,7 +16,7 @@ class Create extends Component
 
     public Attachment $docForm;
 
-    public CategoryForm $catForm;
+    public ProductForm $prodForm;
 
     public function storeLampiran()
     {
@@ -31,33 +32,45 @@ class Create extends Component
 
     public function store()
     {
-        $this->catForm->validate();
+        $this->prodForm->validate();
 
         $this->runSafely(function () {
-            $icon = $this->docForm->storeAttachment('categories/icons', 'public')[0]['url'];
+            $images = $this->docForm->storeAttachment('products', 'public');
+            $image_primary = $images[0]['url'];
 
             Product::create([
-                'category_name' => $this->catForm->name,
-                'category_icon' => $icon,
-                'category_description' => $this->catForm->description,
-                'category_image' => null,
+                'category_id' => $this->prodForm->category,
+                'product_name' => $this->prodForm->name,
+                'product_description' => $this->prodForm->description,
+                'product_image_primary' => $image_primary,
+                'product_images' => $images,
+                'product_unit' => $this->prodForm->unit,
+                'product_weight' => $this->prodForm->weight,
+                'price' => $this->prodForm->price,
+                'stock' => $this->prodForm->stock,
             ]);
 
             $this->dispatch('swal', [
                 'icon' => 'success',
                 'title' => 'Berhasil.',
-                'text' => 'Berhasil menambah kategori baru.',
+                'text' => 'Berhasil menambah produk baru.',
             ]);
 
-            $this->redirectRoute('category.index');
-        }, 'Gagal menambah kategori.', [
+            $this->redirectRoute('product.index');
+        }, 'Gagal menambah produk.', [
             'user_id' => auth()->id(),
-            'action' => 'create_category',
+            'action' => 'create_product',
         ]);
     }
 
     public function render()
     {
-        return view('livewire.dashboard.product.create');
+        $category = ProductCategory::all();
+        $unit = config('crm.satuan');
+
+        return view('livewire.dashboard.product.create', [
+            'categories' => $category,
+            'units' => $unit,
+        ]);
     }
 }

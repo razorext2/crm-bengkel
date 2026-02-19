@@ -40,12 +40,12 @@
                 <flux:table.cell>{{ $row->product_name }}</flux:table.cell>
                 <flux:table.cell>{{ $row->category->category_name }}</flux:table.cell>
                 <flux:table.cell>{{ $row->product_unit }}</flux:table.cell>
-                <flux:table.cell variant="strong">{{ $row->product_weight }} </flux:table.cell>
+                <flux:table.cell variant="strong">{{ $row->product_weight }} KG </flux:table.cell>
                 <flux:table.cell variant="strong">Rp. {{ number_format($row->price, '2', ',', '.') }} </flux:table.cell>
-                <flux:table.cell variant="strong">{{ $row->stock }} </flux:table.cell>
+                <flux:table.cell variant="strong">{{ $row->stock }} {{ $row->product_unit }} </flux:table.cell>
                 <flux:table.cell class="flex gap-x-2">
                     <flux:button class="text-xs" color="blue" variant="primary" wire:navigate
-                        href="{{ route('category.edit', $row->id) }}" icon="pencil" />
+                        href="{{ route('product.edit', $row->id) }}" icon="pencil" />
 
                     <flux:button color="red"
                         wire:confirm.prompt="Yakin ingin menghapus?\nKetik YA jika anda yakin|YA" variant="primary"

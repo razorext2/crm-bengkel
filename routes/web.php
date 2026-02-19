@@ -52,7 +52,7 @@ Route::middleware('auth')
 
         Route::prefix('dashboard')
             ->name('')
-            ->middleware(['auth', 'verified'])
+            ->middleware(['auth', 'verified', 'is_admin'])
             ->group(function () {
                 Route::view('/', 'dashboard.index')->name('dashboard');
 

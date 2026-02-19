@@ -45,14 +45,14 @@ class Index extends Component
             $this->dispatch('swal', [
                 'icon' => 'success',
                 'title' => 'Berhasil',
-                'text' => 'Berhasil menghapus data kategori.',
+                'text' => 'Berhasil menghapus data produk.',
             ]);
 
             $this->dispatch('$refresh');
 
-        }, 'Gagal menghapus data kategori.', [
+        }, 'Gagal menghapus data produk.', [
             'user_id' => auth()->id(),
-            'action' => 'delete_kategori',
+            'action' => 'delete_product',
         ]);
     }
 

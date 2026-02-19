@@ -24,7 +24,7 @@
         </div>
 
         <div
-            class="relative h-fit max-w-lg flex-1 overflow-hidden rounded-xl border border-neutral-200 p-2 lg:p-4 dark:border-neutral-700">
+            class="relative h-fit max-w-4xl flex-1 overflow-hidden rounded-xl border border-neutral-200 p-2 lg:p-4 dark:border-neutral-700">
 
             @livewire('dashboard.product.create')
 

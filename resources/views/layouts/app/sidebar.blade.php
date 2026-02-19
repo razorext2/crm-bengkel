@@ -21,12 +21,12 @@
                 </flux:sidebar.item>
 
                 <flux:sidebar.item icon="clipboard-document-list" :href="route('category.index')"
-                    :current="request()->routeIs('category.index')" wire:navigate>
+                    :current="request()->routeIs('category.*')" wire:navigate>
                     Kategori
                 </flux:sidebar.item>
 
                 <flux:sidebar.item icon="building-storefront" :href="route('product.index')"
-                    :current="request()->routeIs('product.index')" wire:navigate>
+                    :current="request()->routeIs('product.*')" wire:navigate>
                     Produk
                 </flux:sidebar.item>
             </flux:sidebar.group>

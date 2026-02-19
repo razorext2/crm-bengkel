@@ -7,6 +7,7 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -36,7 +37,13 @@ class FortifyServiceProvider extends ServiceProvider
         {
             public function toResponse($request)
             {
-                return redirect('/');
+                $user = Auth::user();
+
+                if ($user->is_admin) {
+                    return redirect()->intended('/dashboard');
+                }
+
+                return redirect()->intended('/');
             }
         });
     }
@@ -49,8 +56,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
 
-            if ($user &&
-                Hash::check($request->password, $user->password) && (! $user->is_admin)) {
+            if ($user && Hash::check($request->password, $user->password)) {
                 return $user;
             }
         });

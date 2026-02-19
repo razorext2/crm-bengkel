@@ -30,7 +30,7 @@ class Attachment extends Form
             'attachment' => [
                 'nullable',
                 'file',
-                'mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx',
+                'mimes:jpg,jpeg,png,webp,bmp,heic',
                 'min:5', // 5kb
                 'max:2048', // 2MB
             ],

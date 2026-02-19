@@ -9,10 +9,10 @@
             </flux:breadcrumbs>
         </div>
 
-        <flux:heading size="xl">Ubah Data Kategori</flux:heading>
+        <flux:heading size="xl">Ubah Detail Produk</flux:heading>
 
         <p class="text-sm text-gray-800 dark:text-white">
-            Silahkan isi form di bawah ini untuk menambahkan kategori produk baru. Pastikan untuk memberikan nama yang
+            Silahkan isi form di bawah ini untuk menambahkan produk baru. Pastikan untuk memberikan nama yang
             jelas dan deskripsi yang informatif agar memudahkan dalam pengelolaan produk Anda.
         </p>
 

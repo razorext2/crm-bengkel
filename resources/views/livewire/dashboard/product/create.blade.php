@@ -1,22 +1,32 @@
-<form wire:submit.prevent="store" class="flex h-fit flex-col gap-2 lg:gap-4">
+<form wire:submit.prevent="store" class="grid h-fit grid-cols-2 gap-2 lg:gap-4">
 
-    <div>
-        <flux:input type="text" label="Nama Kategori" wire:model="catForm.name" />
+    <div class="col-span-2 lg:col-span-1">
+        <flux:select label="Pilih Kategori" wire:model="prodForm.category">
+            <flux:select.option>
+                Pilih kategori produk...
+            </flux:select.option>
+            @forelse ($categories as $row)
+                <flux:select.option value="{{ $row->id }}">
+                    {{ $row->category_name }}
+                </flux:select.option>
+            @empty
+                <p class="text-gray-800">Belum ada kategori yang ditambahkan.</p>
+            @endforelse
+        </flux:select>
     </div>
 
-    <div>
-        <flux:textarea wire:model="catForm.description" label="Deskripsi Kategori"
-            placeholder="Deskripsikan kategori produk dalam beberapa kata..." />
+    <div class="col-span-2 lg:col-span-1">
+        <flux:input type="text" placeholder="Input nama produk..." label="Nama Produk" wire:model="prodForm.name" />
     </div>
 
-    <div>
+    <div class="col-span-2">
         <div x-show="$wire.docForm.new_attachments.length > 0">
             <span class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                Daftar Lampiran
+                Daftar Foto Produk
             </span>
 
             <ul
-                class="divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white shadow-sm dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-700">
+                class="mb-2 divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white shadow-sm dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-700">
 
                 @foreach ($docForm->new_attachments as $index => $row)
                     <li class="flex items-center gap-2 p-2 transition hover:bg-gray-50 dark:hover:bg-gray-800">
@@ -45,7 +55,8 @@
         </div>
 
         <div class="w-full">
-            <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="attachment">Ikon</label>
+            <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="attachment">Foto
+                Produk</label>
 
             <div class="flex w-full flex-col gap-y-2" x-data="{ uploading: false, progress: 0 }"
                 x-on:livewire-upload-start="uploading = true" x-on:livewire-upload-finish="uploading = false"
@@ -79,12 +90,12 @@
                         </div>
 
                         <p class="w-full text-center text-xs text-gray-500 dark:text-gray-400">
-                            *Dokumentasi dapat berupa file Gambar (Min 10KB, Maks
+                            *Foto produk dapat berupa file Gambar (Min 10KB, Maks
                             2MB)
                         </p>
                     </div>
                     <input id="attachment" name="attachment" type="file" wire:model="docForm.attachment"
-                        class="hidden" accept=".jpeg,.jpg,.bmp,.png,.heic" />
+                        class="hidden" accept=".jpeg,.jpg,.bmp,.png,.heic,.webp" />
                 </label>
 
                 <div x-show="uploading" class="h-4 w-full rounded-full bg-gray-200 dark:bg-gray-700">
@@ -101,14 +112,47 @@
 
         <div class="mt-2 flex w-full justify-end lg:mt-4">
             <flux:button type="button" wire:click="storeLampiran" icon="plus" variant="primary" color="blue">
-                Tambah Ikon
+                Tambah Foto Produk
             </flux:button>
         </div>
     </div>
 
-    <div class="flex justify-start">
+    <div class="col-span-2">
+        <flux:textarea rows="8" wire:model="prodForm.description" class="col-span-2" label="Deskripsi Produk"
+            placeholder="Deskripsikan produk dalam beberapa kata..." />
+    </div>
+
+    <div class="col-span-2 lg:col-span-1">
+        <flux:select label="Pilih Satuan" wire:model="prodForm.unit">
+            <flux.select.option>
+                Pilih satuan produk...
+            </flux.select.option>
+            @forelse ($units as $row)
+                <flux:select.option value="{{ $row }}">{{ $row }}</flux:select.option>
+            @empty
+                <p class="text-gray-800">Belum ada satuan yang ditambahkan.</p>
+            @endforelse
+        </flux:select>
+    </div>
+
+    <div class="col-span-2 lg:col-span-1">
+        <flux:input type="number" min="1" placeholder="Input berat produk dalam satuan KG..."
+            label="Berat Produk" wire:model="prodForm.weight" />
+    </div>
+
+    <div class="col-span-2 lg:col-span-1">
+        <flux:input type="number" min="0" placeholder="Input harga produk per satuan..." label="Harga Produk"
+            wire:model="prodForm.price" />
+    </div>
+
+    <div class="col-span-2 lg:col-span-1">
+        <flux:input type="number" min="0" placeholder="Input jumlah stok produk..." label="Stok Saat Ini"
+            wire:model="prodForm.stock" />
+    </div>
+
+    <div class="col-span-2 flex justify-start">
         <flux:button type="submit" icon:trailing="chevron-right" variant="primary" color="green">
-            Simpan Kategori
+            Simpan Produk
         </flux:button>
     </div>
 </form>

@@ -13,11 +13,11 @@
 </head>
 
 <body class="bg-gray-50">
-    @include('layouts.app.navbar')
+    @include('layouts.app.customer.navbar')
 
     @livewire('landing.register')
 
-    @include('layouts.app.footer')
+    @include('layouts.app.customer.footer')
 
     {{-- js --}}
     @livewireScripts

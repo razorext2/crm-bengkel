@@ -35,6 +35,7 @@ new class extends Component {
                         'name' => $this->name,
                         'email' => $this->email,
                         'password' => Hash::make($this->password),
+                        'is_admin' => 0,
                     ]);
 
                     // tambah data customer profile
@@ -46,14 +47,14 @@ new class extends Component {
                     ]);
 
                     // munculkan session alert
-                    session()->flash('alert', [
-                        'type' => 'green',
+                    $this->dispatch('swal', [
+                        'icon' => 'success',
                         'title' => 'Berhasil!',
-                        'message' => 'Akun berhasil dibuat, silahkan login untuk melanjutkan.',
+                        'text' => 'Akun berhasil dibuat, silahkan login untuk melanjutkan.',
                     ]);
 
                     // reset form field
-                    $this->redirect(route('login'));
+                    $this->redirectRoute('login');
                 });
             },
             'Terjadi kesalahan saat membuat akun.',
@@ -164,7 +165,7 @@ new class extends Component {
 
                         <button type="submit"
                             class="w-full rounded-lg bg-red-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            Masuk
+                            Daftar
                         </button>
 
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
