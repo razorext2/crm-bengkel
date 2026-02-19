@@ -48,6 +48,8 @@ class View extends Component
                 'shipping_cost' => $this->form->shipping_cost,
                 'resi_number' => $this->form->resi_number,
                 'order_status' => 2, // pesanan dikirim
+                'is_delivered' => 1,
+                'delivered_at' => now(),
             ]);
 
             // swal
@@ -62,6 +64,34 @@ class View extends Component
             'user_id' => auth()->id(),
             'action' => 'update_delivery',
             'transaction_id' => $this->data->id,
+        ]);
+    }
+
+    public function markAsCompleted($id)
+    {
+        if ($this->data->id !== $id) {
+            return $this->dispatch('swal', [
+                'icon' => 'error',
+                'title' => 'Gagal',
+                'text' => 'Transaksi tidak ditemukan.',
+            ]);
+        }
+
+        $this->runSafely(function () {
+            // update
+            $this->data->update([
+                'is_completed' => 1,
+                'completed_at' => now(),
+            ]);
+
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'text' => 'Berhasil menyelesaikan pesanan.',
+            ]);
+        }, 'Gagal menandai pesanan selesai.', [
+            'user_id' => auth()->id(),
+            'action' => 'mark_as_completed',
         ]);
     }
 

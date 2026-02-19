@@ -160,30 +160,44 @@
         <div
             class="mb-4 space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
 
-            <flux:select label="Pilih Jasa Kirim" wire:model="form.shipping_service">
-                <flux:select.option>
-                    Pilih jasa kirim...
-                </flux:select.option>
-                @forelse (config('crm.jasa_kirm') as $row)
-                    <flux:select.option value="{{ $row['id'] }}">
-                        {{ $row['name'] }}
+            @if (!$data->is_delivered)
+
+                <flux:select label="Pilih Jasa Kirim" wire:model="form.shipping_service">
+                    <flux:select.option>
+                        Pilih jasa kirim...
                     </flux:select.option>
-                @empty
-                    <p class="text-gray-800">Belum ada kategori yang ditambahkan.</p>
-                @endforelse
-            </flux:select>
+                    @forelse (config('crm.jasa_kirm') as $row)
+                        <flux:select.option value="{{ $row['id'] }}">
+                            {{ $row['name'] }}
+                        </flux:select.option>
+                    @empty
+                        <p class="text-gray-800">Belum ada kategori yang ditambahkan.</p>
+                    @endforelse
+                </flux:select>
 
-            <flux:input type="text" label="Nomor Resi" wire:model="form.resi_number"
-                placeholder="Input nomor resi..." />
+                <flux:input type="text" label="Nomor Resi" wire:model="form.resi_number"
+                    placeholder="Input nomor resi..." />
 
-            <flux:input type="number" min="0" placeholder="Input biaya pengiriman..." label="Biaya Pengiriman"
-                wire:model="form.shipping_cost" />
+                <flux:input type="number" min="0" placeholder="Input biaya pengiriman..."
+                    label="Biaya Pengiriman" wire:model="form.shipping_cost" />
 
-            <div class="mt-2 flex justify-start">
-                <flux:button type="submit" icon:trailing="chevron-right" variant="primary" color="green">
-                    Perbarui Pengiriman
-                </flux:button>
-            </div>
+                <div class="mt-2 flex justify-start">
+                    <flux:button type="submit" icon:trailing="chevron-right" variant="primary" color="green">
+                        Perbarui Pengiriman
+                    </flux:button>
+                </div>
+            @else
+                <p class="text-white">Pengiriman telah dilakukan
+                    {{ \Carbon\Carbon::parse($data->delivered_at)->format('D, M Y H:I:s') }}.
+                </p>
+
+                @if ($data->is_completed === 0 && $data->order_status === 3)
+                    <flux:button type="submit" variant="primary" color="green"
+                        wire:click.prevent="markAsCompleted({{ $data->id }})">
+                        Tandai Transaksi Selesai
+                    </flux:button>
+                @endif
+            @endif
         </div>
     </form>
 </div>

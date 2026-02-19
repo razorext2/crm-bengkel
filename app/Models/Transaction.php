@@ -18,6 +18,10 @@ class Transaction extends Model
         'shipping_cost',
         'payment_proof',
         'description',
+        'is_delivered',
+        'delivered_at',
+        'is_completed',
+        'completed_at',
     ];
 
     public function casts()

@@ -32,7 +32,7 @@
                 <flux:table.cell>
                     {{ $row->user->name }}
                 </flux:table.cell>
-                <flux:table.cell class="flex flex-col">
+                <flux:table.cell class="flex flex-col gap-1">
                     <span
                         class="{{ $this->setStatus($row->order_status) }} inline-flex w-fit items-center rounded px-2.5 py-0.5 text-xs font-medium">
                         {{ $row->order_status_description['description'] }}
@@ -41,6 +41,12 @@
                         <span
                             class="inline-flex w-fit items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
                             Menunggu Verifikasi
+                        </span>
+                    @endif
+                    @if ($row->is_completed)
+                        <span
+                            class="inline-flex w-fit items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                            Pesanan Selesai
                         </span>
                     @endif
                 </flux:table.cell>
