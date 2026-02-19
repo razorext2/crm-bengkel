@@ -103,14 +103,16 @@
                         <x-input.basic id="nama_alamat" label="Nama Alamat" placeholder="Ketik nama alamat..."
                             type="text" wire:model="form.address_name" errorName="form.address_name" />
 
-                        <x-input.basic id="kota" label="Kota" placeholder="Ketik nama kota..." type="text"
-                            wire:model="form.city" errorName="form.city" />
-
-                        <x-input.basic id="provinsi" label="Provinsi" placeholder="Ketik nama provinsi..."
-                            type="text" wire:model="form.province" errorName="form.province" />
-
                         <x-input.basic id="negara" label="Negara" placeholder="Ketik nama negara..." type="text"
-                            wire:model="form.country" errorName="form.country" />
+                            wire:model="form.country" errorName="form.country" disabled />
+
+                        <x-input.select id="provinsi" label="Provinsi" wire:model.live="form.province"
+                            :options="$provinces" valueField="id" labelField="name" errorName="form.province" />
+
+                        @if ($form->province)
+                            <x-input.select id="kota" label="Kota" wire:model.live="form.city" :options="$province['cities']"
+                                valueField="id" labelField="name" errorName="form.city" />
+                        @endif
 
                         <x-input.basic id="kode_pos" label="Kode Pos" placeholder="Ketik kode pos daerah..."
                             type="text" wire:model="form.postal_code" errorName="form.postal_code" />

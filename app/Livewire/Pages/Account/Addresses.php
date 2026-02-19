@@ -17,6 +17,11 @@ class Addresses extends Component
 
     public ?bool $showAddModal = false;
 
+    public function mount()
+    {
+        $this->form->country = 'Indonesia';
+    }
+
     public function addAddressProcess()
     {
         $this->form->validate();
@@ -103,8 +108,17 @@ class Addresses extends Component
             ->where('user_id', auth()->user()->id)
             ->get();
 
+        $provinces = \Laravolt\Indonesia\Facade::allProvinces()->toArray();
+        $province = [];
+
+        if ($this->form->province) {
+            $province = \Laravolt\Indonesia\Facade::findProvince(provinceId: $this->form->province, with: 'cities')->toArray();
+        }
+
         return view('livewire.pages.account.addresses', [
             'addresses' => $addresses,
+            'provinces' => $provinces,
+            'province' => $province,
         ]);
     }
 }

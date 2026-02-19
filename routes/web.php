@@ -65,6 +65,10 @@ Route::middleware('auth')
                 Route::view('/product', 'dashboard.product.index')->name('product.index');
                 Route::view('/product/create', 'dashboard.product.create')->name('product.create');
                 Route::view('/product/edit/{id}', 'dashboard.product.edit')->name('product.edit');
+
+                // pelanggan
+                Route::view('/customer', 'dashboard.customer.index')->name('customer.index');
+                Route::view('/customer/view/{id}', 'dashboard.customer.view')->name('customer.view');
             });
     });
 

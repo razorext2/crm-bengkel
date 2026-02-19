@@ -85,6 +85,40 @@ class Checkout extends Component
         ]);
     }
 
+    public function qtyPlus($id)
+    {
+        $data = CustomerCartItem::find($id);
+
+        if ($data->product->stock < $data->quantity + 1) {
+            return $this->dispatch('swal', [
+                'icon' => 'warning',
+                'title' => 'Gagal',
+                'text' => 'Stok barang tidak mencukupi',
+            ]);
+        }
+
+        $data->update([
+            'quantity' => $data->quantity + 1,
+        ]);
+    }
+
+    public function qtyMinus($id)
+    {
+        $data = CustomerCartItem::find($id);
+
+        if ($data->quantity == 1) {
+            return $this->dispatch('swal', [
+                'icon' => 'warning',
+                'title' => 'Gagal',
+                'text' => 'Jumlah barang tidak boleh kurang dari 1',
+            ]);
+        }
+
+        $data->update([
+            'quantity' => $data->quantity - 1,
+        ]);
+    }
+
     #[Layout('layouts.app-customer')]
     public function render()
     {

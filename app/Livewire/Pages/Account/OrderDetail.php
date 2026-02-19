@@ -52,12 +52,14 @@ class OrderDetail extends Component
                 'payment_proof' => $lampiran,
             ]);
 
+            $this->docForm->reset();
+            $this->showPaymentProofModal = false;
+
             $this->dispatch('swal', [
                 'icon' => 'success',
                 'title' => 'Berhasil.',
                 'text' => 'Bukti pembayaran berhasil diunggah.',
             ]);
-
         }, 'Gagal menyimpan bukti pembayaran.', [
             'user_id' => auth()->id(),
             'transaction_id' => $this->id,

@@ -48,7 +48,7 @@
                                         <tr>
                                             <td class="whitespace-nowrap py-4 md:w-[384px]">
                                                 <div class="flex items-center gap-4">
-                                                    <a href="#"
+                                                    <a href="{{ route('product.detail', $item->product->id) }}"
                                                         class="flex aspect-square h-10 w-10 shrink-0 items-center">
 
                                                         <img class="h-auto max-h-full w-full dark:hidden"
@@ -57,14 +57,25 @@
 
                                                     </a>
                                                     <a href="{{ route('product.detail', $item->product->id) }}"
-                                                        class="hover:underline">
-                                                        {{ $item->product->product_name }}
+                                                        class="text-wrap">
+                                                        {{ $item->product->product_name }},
+                                                        Rp. {{ number_format($item->product->price, 2, ',', '.') }}
                                                     </a>
+
                                                 </div>
                                             </td>
 
-                                            <td class="p-4 text-base font-normal text-gray-900 dark:text-white">
-                                                x{{ $item->quantity }}
+                                            <td
+                                                class="flex items-center gap-x-2 p-4 text-base font-normal text-gray-900 dark:text-white">
+                                                <x-button.primary wire:click.prevent="qtyPlus({{ $item->id }})"
+                                                    class="!px-2 !py-0.5">
+                                                    <x-icons.plus class="h-4 w-4" />
+                                                </x-button.primary>
+                                                <span>x {{ $item->quantity }}</span>
+                                                <x-button.primary class="!px-2 !py-0.5"
+                                                    wire:click.prevent="qtyMinus({{ $item->id }})">
+                                                    <x-icons.minus class="h-4 w-4" />
+                                                </x-button.primary>
                                             </td>
 
                                             <td
@@ -119,7 +130,7 @@
 
                             <div class="gap-4 sm:flex sm:items-center">
                                 <a href="{{ route('home') }}"
-                                    class="w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">
+                                    class="w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">
                                     Kembali Belanja
                                 </a>
 

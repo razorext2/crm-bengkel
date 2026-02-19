@@ -29,6 +29,11 @@
                     :current="request()->routeIs('product.*')" wire:navigate>
                     Produk
                 </flux:sidebar.item>
+
+                <flux:sidebar.item icon="users" :href="route('customer.index')"
+                    :current="request()->routeIs('customer.*')" wire:navigate>
+                    Data Pelanggan
+                </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 
