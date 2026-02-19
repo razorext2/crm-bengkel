@@ -68,26 +68,42 @@
                     <div id="userDropdown1"
                         class="z-10 hidden w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
                         <ul class="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('account.me') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                     Akun Saya
                                 </a>
-                            </li>
-                            <li><a href="{{ route('account.order') }}" title=""
+                            </li> --}}
+                            <li>
+                                <a href="{{ route('account.order') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                     Pesanan Saya
                                 </a>
                             </li>
-                            <li><a href="{{ route('account.settings') }}" title=""
+                            <li>
+                                <a href="{{ route('account.review') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    Pengaturan </a></li>
-                            <li><a href="{{ route('account.favorite') }}" title=""
+                                    Ulasan Saya
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('account.favorite') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    Favorit </a></li>
-                            <li><a href="{{ route('account.addresses') }}" title=""
+                                    Favorit
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('account.addresses') }}" title=""
                                     class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    Alamat Pengiriman </a></li>
+                                    Alamat Pengiriman
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('account.settings') }}" title=""
+                                    class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    Pengaturan
+                                </a>
+                            </li>
                         </ul>
 
                         <div class="t p-2 text-sm font-medium text-red-500 dark:text-white">

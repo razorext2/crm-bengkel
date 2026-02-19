@@ -26,7 +26,7 @@
                                 <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
                                     <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Tanggal:</dt>
                                     <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                                        {{ Carbon\Carbon::parse($row->created_at)->format('d M Y') }}
+                                        {{ Carbon\Carbon::parse($row->created_at)->format('d M Y H:i:s') }}
                                     </dd>
                                 </dl>
 

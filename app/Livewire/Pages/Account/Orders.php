@@ -34,7 +34,7 @@ class Orders extends Component
     public function render()
     {
         $transactions = \App\Models\Transaction::where('user_id', auth()->id())
-            ->orderBy('order_status', 'asc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(perPage: 5, pageName: 'transaction-page');
 
         return view('livewire.pages.account.orders', [

@@ -37,18 +37,16 @@ Route::middleware('auth')
                 // Route::livewire('/me', 'pages::account.me')->name('me');
                 Route::livewire('/my', 'pages.account.my')->name('me');
                 Route::livewire('/orders', 'pages.account.orders')->name('order');
+                Route::livewire('/review', 'pages.account.reviews')->name('review');
                 Route::livewire('/order/{id}', 'pages.account.order-detail')->name('order.detail');
+                Route::livewire('/order/{id}/review', 'pages.account.order-review')->name('order.review');
                 Route::livewire('/settings', 'pages.account.setting')->name('settings');
                 Route::livewire('/favorite', 'pages.account.favorite')->name('favorite');
                 Route::livewire('/addresses', 'pages.account.addresses')->name('addresses');
             });
 
         // checkout
-        Route::prefix('checkout')
-            ->name('checkout.')
-            ->group(function () {
-                Route::livewire('/', 'pages.handler.checkout')->name('index');
-            });
+        Route::livewire('/checkout', 'pages.handler.checkout')->name('checkout.index');
 
         Route::prefix('dashboard')
             ->name('')

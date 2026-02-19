@@ -6,7 +6,7 @@
         <div class="mx-auto max-w-screen-xl p-8">
 
             <h2 class="mb-2 flex items-center gap-x-2 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                Detail Pesanan #{{ $data->invoice_number }}
+                Berikan Ulasan #{{ $data->invoice_number }}
 
                 @php
                     $totalPrice = 0;
@@ -110,17 +110,45 @@
                             <tr>
                                 <td class="whitespace-nowrap py-4 md:w-[384px]">
                                     <div class="flex items-center gap-4">
-                                        <a href="#" class="flex aspect-square h-10 w-10 shrink-0 items-center">
+                                        <a href="{{ route('product.detail', $item->product->id) }}"
+                                            class="flex aspect-square h-10 w-10 shrink-0 items-center">
 
                                             <img class="h-auto max-h-full w-full dark:hidden"
                                                 src="{{ asset('storage/' . $item->product->product_image_primary) }}"
                                                 alt="imac image" />
+                                        </a>
+                                        <div>
+                                            <a href="{{ route('product.detail', $item->product->id) }}"
+                                                class="text-wrap">
+                                                {{ $item->product->product_name }},
+                                                Rp. {{ number_format($item->product->price, 2, ',', '.') }}
+                                            </a>
 
-                                        </a>
-                                        <a href="{{ route('product.detail', $item->product->id) }}" class="text-wrap">
-                                            {{ $item->product->product_name }},
-                                            Rp. {{ number_format($item->product->price, 2, ',', '.') }}
-                                        </a>
+                                            @php
+                                                $review = $item->product->reviews
+                                                    ->where('transaction_id', $data->id)
+                                                    ->first();
+                                            @endphp
+
+                                            @if ($review)
+                                                @php
+                                                    $rating = $review->rating;
+                                                @endphp
+
+                                                <div class="flex">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <x-icons.star
+                                                            class="{{ $rating >= $i ? 'text-yellow-400' : 'text-gray-400' }} h-5 w-5" />
+                                                    @endfor
+                                                </div>
+
+                                                <p class="text-sm font-normal">
+                                                    {{ $review->review }}
+                                                </p>
+                                            @endif
+
+                                        </div>
+
                                     </div>
                                 </td>
 
@@ -194,6 +222,16 @@
                         class="rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Pesanan Diterima
                     </button>
+                @endif
+
+                @if (
+                    $data->order_status === 3 &&
+                        $data->is_completed &&
+                        $data->transactionDetail->every(fn($detail) => $detail->product->reviews->isEmpty()))
+                    <a href="{{ route('account.order.review', ['id' => $data->id]) }}"
+                        class="cursor-pointer rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        Beri Ulasan
+                    </a>
                 @endif
 
                 @if ($data->shipping_service !== 'jskrmtk')
