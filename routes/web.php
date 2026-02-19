@@ -69,6 +69,14 @@ Route::middleware('auth')
                 // pelanggan
                 Route::view('/customer', 'dashboard.customer.index')->name('customer.index');
                 Route::view('/customer/view/{id}', 'dashboard.customer.view')->name('customer.view');
+
+                // transaksi
+                Route::view('/transaction', 'dashboard.transaction.index')->name('transaction.index');
+                Route::view('/transaction/view/{id}', 'dashboard.transaction.view')->name('transaction.view');
+
+                // pengiriman
+                Route::view('/delivery', 'dashboard.delivery.index')->name('delivery.index');
+                Route::view('/delivery/view/{id}', 'dashboard.delivery.view')->name('delivery.view');
             });
     });
 

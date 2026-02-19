@@ -40,7 +40,7 @@
                                     @php
                                         $statusColors = [
                                             0 => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-                                            1 => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+                                            1 => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
                                             2 => 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
                                             3 => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
                                             4 => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
@@ -62,7 +62,7 @@
 
                                 <div
                                     class="grid w-full gap-4 sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end">
-                                    @if ($row->order_status != 4)
+                                    @if ($row->order_status === 0)
                                         <button type="button"
                                             wire:confirm.prompt="Apakah kamu yakin ingin membatalkan transaksi ini?\nKetik BATAL jika kamu yakin.|BATAL"
                                             wire:click.prevent="cancelTransaction({{ $row->id }})"

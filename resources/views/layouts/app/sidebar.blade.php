@@ -34,6 +34,16 @@
                     :current="request()->routeIs('customer.*')" wire:navigate>
                     Data Pelanggan
                 </flux:sidebar.item>
+
+                <flux:sidebar.item icon="currency-dollar" :href="route('transaction.index')"
+                    :current="request()->routeIs('transaction.*')" wire:navigate>
+                    Transaksi
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="truck" :href="route('delivery.index')"
+                    :current="request()->routeIs('delivery.*')" wire:navigate>
+                    Pengiriman
+                </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 

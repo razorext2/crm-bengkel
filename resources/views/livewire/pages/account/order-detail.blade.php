@@ -13,7 +13,7 @@
 
                     $statusColors = [
                         0 => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-                        1 => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+                        1 => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
                         2 => 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
                         3 => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
                         4 => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
@@ -80,7 +80,8 @@
                 <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Jasa Kirim</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
-
+                        {{ \App\Helpers\JasaKirim::jasaKirimName($data->shipping_service) }}
+                        (No resi: {{ $data->resi_number }})
                     </dd>
                 </dl>
                 <dl class="items-start justify-between gap-4 sm:flex">
@@ -116,9 +117,9 @@
                                                 alt="imac image" />
 
                                         </a>
-                                        <a href="{{ route('product.detail', $item->product->id) }}"
-                                            class="hover:underline">
-                                            {{ $item->product->product_name }}
+                                        <a href="{{ route('product.detail', $item->product->id) }}" class="text-wrap">
+                                            {{ $item->product->product_name }},
+                                            Rp. {{ number_format($item->product->price, 2, ',', '.') }}
                                         </a>
                                     </div>
                                 </td>
@@ -180,15 +181,28 @@
             {{-- end products --}}
 
             {{-- action --}}
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
                 <a href="{{ route('account.order') }}"
                     class="rounded-lg bg-red-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     Kembali
                 </a>
 
-                <a href="#"
-                    class="rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Track
-                    your order</a>
+                @if ($data->order_status === 2)
+                    <button
+                        wire:confirm.prompt="Apakah anda benar benar sudah memastikan pesanan telah tiba?\nKetik YA jika sudah dikonfirmasi.|YA"
+                        wire:click.prevent="hasArrived({{ $data->id }})"
+                        class="rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        Pesanan Diterima
+                    </button>
+                @endif
+
+                @if ($data->shipping_service !== 'jskrmtk')
+                    <a href="{{ \App\Helpers\JasaKirim::jasaKirimUrl($data->shipping_service) }}"
+                        class="rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        target="_blank">
+                        Track your order
+                    </a>
+                @endif
             </div>
             {{-- end action --}}
         </div>

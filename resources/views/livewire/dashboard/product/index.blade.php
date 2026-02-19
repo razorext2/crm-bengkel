@@ -6,7 +6,7 @@
             wire:click="sort('product_name')">
             Nama Produk
         </flux:table.column>
-        <flux:table.column sortable :soretd="$sortBy === 'category_id'" :direction="$sortDirection"
+        <flux:table.column sortable :sorted="$sortBy === 'category_id'" :direction="$sortDirection"
             wire:click="sort('category_id')">
             Kategori
         </flux:table.column>
@@ -57,7 +57,7 @@
                 <flux:table.cell colspan="9">
                     <div class="flex flex-col items-center gap-2 py-8">
                         <x-placeholder-pattern class="size-16 stroke-gray-900/20 dark:stroke-neutral-100/20" />
-                        <p class="text-sm text-gray-500">Tidak ada kategori produk yang ditemukan.</p>
+                        <p class="text-sm text-gray-500">Tidak ada produk yang ditemukan.</p>
                     </div>
                 </flux:table.cell>
             </flux:table.row>

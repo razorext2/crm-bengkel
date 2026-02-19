@@ -2,24 +2,21 @@
     <flux:table.columns>
         <flux:table.column>No. </flux:table.column>
         <flux:table.column>Foto</flux:table.column>
-        <flux:table.column sortable :sorted="$sortBy === 'product_name'" :direction="$sortDirection"
-            wire:click="sort('product_name')">
+        <flux:table.column sortable :sorted="$sortBy === 'name'" :direction="$sortDirection"
+            wire:click="sort('name')">
             Nama Customer
         </flux:table.column>
-        <flux:table.column sortable :soretd="$sortBy === 'category_id'" :direction="$sortDirection"
-            wire:click="sort('category_id')">
+        <flux:table.column sortable :sorted="$sortBy === 'email'" :direction="$sortDirection"
+            wire:click="sort('email')">
             Email
         </flux:table.column>
-        <flux:table.column sortable :sorted="$sortBy === 'product_unit'" :direction="$sortDirection"
-            wire:click="sort('product_unit')">
+        <flux:table.column>
             Telepon
         </flux:table.column>
-        <flux:table.column sortable :sorted="$sortBy === 'product_weight'" :direction="$sortDirection"
-            wire:click="sort('product_weight')">
+        <flux:table.column>
             Alamat
         </flux:table.column>
-        <flux:table.column sortable :sorted="$sortBy === 'product_weight'" :direction="$sortDirection"
-            wire:click="sort('product_weight')">
+        <flux:table.column>
             Poin
         </flux:table.column>
         <flux:table.column>Aksi</flux:table.column>
@@ -50,7 +47,7 @@
                 <flux:table.cell colspan="7">
                     <div class="flex flex-col items-center gap-2 py-8">
                         <x-placeholder-pattern class="size-16 stroke-gray-900/20 dark:stroke-neutral-100/20" />
-                        <p class="text-sm text-gray-500">Tidak ada kategori produk yang ditemukan.</p>
+                        <p class="text-sm text-gray-500">Tidak ada data pelanggan yang ditemukan.</p>
                     </div>
                 </flux:table.cell>
             </flux:table.row>

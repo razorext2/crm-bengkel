@@ -67,6 +67,37 @@ class OrderDetail extends Component
         ]);
     }
 
+    public function hasArrived($id)
+    {
+        if ($this->data->id !== $id) {
+            return $this->dispatch('swal', [
+                'icon' => 'error',
+                'title' => 'Gagal',
+                'text' => 'Transaksi tidak ditemukan',
+            ]);
+        }
+
+        $this->runSafely(function () {
+            // konfirmasi
+            $this->data->update([
+                'order_status' => 3, // pesanan tiba
+            ]);
+
+            // swal
+            $this->dispatch('swal', [
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'text' => 'Pesanan tiba berhasil dikonfirmasi.',
+            ]);
+
+            $this->dispatch('$refresh');
+        }, 'Gagal konfirmasi pesanan tiba.', [
+            'user_id' => auth()->id(),
+            'action' => 'konfirmasi_pesanan_tiba',
+            'transaction_id' => $id,
+        ]);
+    }
+
     #[Layout('layouts.app-customer')]
     public function render()
     {

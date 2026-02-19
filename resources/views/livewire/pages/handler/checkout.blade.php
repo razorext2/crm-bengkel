@@ -51,7 +51,7 @@
                                                     <a href="{{ route('product.detail', $item->product->id) }}"
                                                         class="flex aspect-square h-10 w-10 shrink-0 items-center">
 
-                                                        <img class="h-auto max-h-full w-full dark:hidden"
+                                                        <img class="h-auto max-h-full w-full object-cover"
                                                             src="{{ asset('storage/' . $item->product->product_image_primary) }}"
                                                             alt="imac image" />
 
