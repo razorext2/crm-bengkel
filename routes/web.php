@@ -9,10 +9,12 @@ Route::livewire('/today-promo', 'pages.today-promos')->name('today-promo');
 
 Route::livewire('/best-seller', 'pages.best-seller')->name('best-seller');
 
+Route::livewire('/products', 'pages.products')->name('products');
+
 Route::prefix('product')
     ->name('product.')
     ->group(function () {
-        Route::livewire('/product/{id}', 'pages.product.detail')->name('detail');
+        Route::livewire('/detail/{id}', 'pages.product.detail')->name('detail');
     });
 
 Route::middleware('auth')

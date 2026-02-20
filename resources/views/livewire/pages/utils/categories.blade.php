@@ -1,11 +1,11 @@
-<div class="mx-auto flex max-w-screen-xl flex-col gap-2 p-4 lg:gap-4 lg:p-8">
+<div class="flex w-full flex-col gap-2 lg:gap-4">
 
     <h2 class="mb-2 text-4xl font-extrabold text-gray-900 dark:text-white">Kategori</h2>
 
     <div class="grid w-full grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-4">
 
         @forelse ($categories as $row)
-            <a href="#"
+            <a href="{{ route('products', ['category' => $row->id]) }}"
                 class="flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 lg:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
 
                 <img class="me-2 h-4 w-4 shrink-0 bg-cover" src="{{ asset('storage/' . $row->category_icon) }}" />

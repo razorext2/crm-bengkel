@@ -14,7 +14,7 @@ new class extends Component {
 };
 ?>
 
-<nav class="mb-2 mb-4 flex max-w-screen-xl py-4" aria-label="Breadcrumb">
+<nav class="mb-4 flex max-w-screen-xl py-4" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
             <a href="{{ route('home') }}"

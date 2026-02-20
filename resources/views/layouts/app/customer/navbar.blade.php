@@ -17,26 +17,26 @@
 
                 <ul class="hidden items-center justify-start gap-6 py-3 sm:justify-center md:gap-8 lg:flex">
                     <li>
-                        <a href="{{ route('home') }}" title=""
-                            class="flex text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
+                        <a href="{{ route('home') }}" wire:navigate title=""
+                            class="{{ request()->routeIs('home') ? 'text-blue-700' : 'text-gray-900' }} flex text-sm font-medium text-gray-900 hover:text-blue-700">
                             Beranda
                         </a>
                     </li>
                     <li class="shrink-0">
-                        <a href="{{ route('best-seller') }}" title=""
-                            class="flex text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
+                        <a href="{{ route('products', ['category' => 0]) }}" wire:navigate title=""
+                            class="{{ request()->routeIs('products') ? 'text-blue-700' : 'text-gray-900' }} flex text-sm font-medium hover:text-blue-700">
+                            Semua Produk
+                        </a>
+                    </li>
+                    <li class="shrink-0">
+                        <a href="{{ route('best-seller') }}" wire:navigate title=""
+                            class="{{ request()->routeIs('best-seller') ? 'text-blue-700' : 'text-gray-900' }} flex text-sm font-medium hover:text-blue-700">
                             Paling Laku
                         </a>
                     </li>
-                    {{-- <li class="shrink-0">
-                        <a href="#" title=""
-                            class="flex text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
-                            Sparepart Motor & Mobil
-                        </a>
-                    </li> --}}
                     <li class="shrink-0">
-                        <a href="{{ route('today-promo') }}" title=""
-                            class="text-sm font-medium text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
+                        <a href="{{ route('today-promo') }}" wire:navigate title=""
+                            class="{{ request()->routeIs(patterns: 'today-promo') ? 'text-blue-700' : 'text-gray-900' }} text-sm font-medium text-gray-900 hover:text-blue-700">
                             Promo Hari Ini
                         </a>
                     </li>

@@ -1,15 +1,15 @@
-<div id="products" class="mx-auto max-w-screen-xl p-4 lg:p-8">
+<div id="products" class="w-full">
 
-    <h2 class="mb-6 text-4xl font-extrabold text-gray-900 dark:text-white">Produk</h2>
+    <h2 class="mb-4 text-4xl font-extrabold text-gray-900 lg:mb-8 dark:text-white">Produk</h2>
 
-    <div class="mb-4 grid grid-cols-2 gap-8 md:grid-cols-4">
-
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
         @forelse ($products as $row)
             <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
                 <a href="{{ route('product.detail', $row->id) }}">
-                    <img class="h-64 w-full rounded-lg object-cover sm:rounded-none sm:rounded-l-lg"
+                    <img class="h-64 w-full rounded-lg object-cover"
                         src="{{ asset('storage/' . $row->product_image_primary) }}" alt="{{ $row->product_name }}">
                 </a>
+
                 <div class="p-5">
                     <h3 class="text-xl font-bold text-blue-600">
                         <a href="{{ route('product.detail', $row->id) }}">{{ $row->product_name }}</a>
@@ -25,20 +25,13 @@
                                 $rating = $row->reviews->avg('rating');
                             @endphp
 
-                            @for ($i = 0; $i < floor($rating); $i++)
-                                <li>
-                                    <x-icons.star class="h-4 w-4 text-yellow-500" />
-                                </li>
-                            @endfor
-
-                            @for ($i = 5; $i > floor($rating); $i--)
-                                <li>
-                                    <x-icons.star class="h-4 w-4 text-gray-400" />
-                                </li>
+                            @for ($i = 1; $i <= 5; $i++)
+                                <x-icons.star
+                                    class="{{ $rating >= $i ? 'text-yellow-400' : 'text-gray-400' }} h-5 w-5" />
                             @endfor
                         </ul>
 
-                        <span class="text-sm"> ({{ $rating ? $row->reviews->count() : 0 }}) </span>
+                        <span class="text-sm"> {{ $rating }} ({{ $rating ? $row->reviews->count() : 0 }}) </span>
                     </div>
 
                     <p class="text-gring-gray-500 text-sm dark:text-gray-400">Kategori:
