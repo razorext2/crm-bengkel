@@ -50,7 +50,8 @@
         <flux:spacer />
 
         <flux:sidebar.nav>
-            <flux:sidebar.item icon="folder-git-2" href="#" target="_blank">
+            <flux:sidebar.item icon="document-duplicate" href="{{ route('report.index') }}" wire:navigate
+                :current="request()->routeIs('report.*')">
                 Laporan
             </flux:sidebar.item>
         </flux:sidebar.nav>

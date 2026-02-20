@@ -77,6 +77,8 @@ Route::middleware('auth')
                 // pengiriman
                 Route::view('/delivery', 'dashboard.delivery.index')->name('delivery.index');
                 Route::view('/delivery/view/{id}', 'dashboard.delivery.view')->name('delivery.view');
+
+                Route::view('/report', 'dashboard.report.index')->name('report.index');
             });
     });
 
