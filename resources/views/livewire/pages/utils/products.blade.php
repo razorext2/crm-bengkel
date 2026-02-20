@@ -2,7 +2,16 @@
 
     <h2 class="mb-4 text-4xl font-extrabold text-gray-900 lg:mb-8 dark:text-white">Produk</h2>
 
+    <div class="flex w-full gap-2 lg:gap-4">
+        <x-input.basic :divClass="'flex-1'" id="search" placeholder="Cari nama produk..." type="text"
+            wire:model.live.throttle.500ms="search" errorName="search" />
+
+        <x-input.select id="category" :divClass="'flex-none w-44'" wire:model.live.throttle.500ms="category" :options="$categories"
+            valueField="id" labelField="category_name" errorName="category" />
+    </div>
+
     <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+
         @forelse ($products as $row)
             <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
                 <a href="{{ route('product.detail', $row->id) }}">
@@ -75,7 +84,7 @@
 
             </div>
         @empty
-            <p class="text-gray-800">Belum ada produk yang ditambahkan.</p>
+            <p class="col-span-full mt-2 text-center text-gray-800 lg:mt-4">Belum ada produk yang ditambahkan.</p>
         @endforelse
 
     </div>

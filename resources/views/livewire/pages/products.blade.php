@@ -92,6 +92,9 @@
 
         <section id="products" class="grid h-fit flex-1 grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
 
+            <x-input.basic :divClass="'!mb-0 col-span-full w-full'" id="search" label="Cari Produk" placeholder="Cari nama produk..."
+                type="text" wire:model.live.throttle.500ms="search" errorName="search" />
+
             @forelse($this->getProducts() as $row)
                 <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
                     <a href="{{ route('product.detail', $row->id) }}">

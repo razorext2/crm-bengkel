@@ -3,11 +3,19 @@
 namespace App\Livewire\Pages\Utils;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductFavorite;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Products extends Component
 {
+    #[Url(as: 'product_name')]
+    public ?string $search = '';
+
+    #[Url(as: 'category')]
+    public ?int $category = null;
+
     public function addToCart($id)
     {
         // check apakah sudah auth
@@ -73,9 +81,20 @@ class Products extends Component
 
     public function render()
     {
+        $categories = ProductCategory::get()->toArray();
+        $products = Product::query()->with('category')
+            ->when($this->search, function ($query) {
+                return $query->where('product_name', 'like', '%'.$this->search.'%');
+            })
+            ->when($this->category, function ($query) {
+                return $query->where('category_id', $this->category);
+            })
+            ->paginate(16, pageName: 'product-page');
+
         return view('livewire.pages.utils.products',
             [
-                'products' => Product::paginate(16, pageName: 'product-page'),
+                'products' => $products,
+                'categories' => $categories,
             ]);
     }
 }

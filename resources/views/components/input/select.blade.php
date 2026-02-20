@@ -6,16 +6,19 @@
     'errorName' => null,
     'valueField' => 'id',
     'labelField' => 'name',
+    'divClass' => '',
 ])
 
 @php
     $selectedValue = old($attributes->wire('model')->value() ?? $attributes->get('name'));
 @endphp
 
-<div class="mb-5">
-    <label for="{{ $id }}" class="text-heading mb-2.5 block text-sm font-medium">
-        {{ $label }}
-    </label>
+<div class="{{ $divClass }} mb-5">
+    @if ($label)
+        <label for="{{ $id }}" class="text-heading mb-2.5 block text-sm font-medium">
+            {{ $label }}
+        </label>
+    @endif
 
     <select id="{{ $id }}"
         {{ $attributes->merge([
