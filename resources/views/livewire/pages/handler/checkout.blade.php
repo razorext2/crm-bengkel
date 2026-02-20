@@ -96,6 +96,24 @@
                             </table>
                         </div>
 
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="flex items-center">
+                                <x-icons.bitcoin class="me-2 h-6 w-6 text-yellow-500" />
+
+                                <span class="me-2">
+                                    Gunakan {{ auth()->user()->profile->points }} poin untuk potongan?
+                                </span>
+                            </div>
+
+                            <label class="inline-flex cursor-pointer items-center">
+                                <input type="checkbox" value="" class="peer sr-only">
+                                <div
+                                    class="bg-neutral-quaternary peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft peer-checked:after:border-buffer peer-checked:bg-brand peer relative h-5 w-9 rounded-full after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full">
+                                </div>
+                            </label>
+
+                        </div>
+
                         <div class="mt-4 space-y-6">
                             <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Order summary</h4>
 

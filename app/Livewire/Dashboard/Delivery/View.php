@@ -4,6 +4,8 @@ namespace App\Livewire\Dashboard\Delivery;
 
 use App\Livewire\Concerns\HandlesErrors;
 use App\Livewire\Forms\Delivery;
+use App\Models\PointHistory;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class View extends Component
@@ -78,11 +80,26 @@ class View extends Component
         }
 
         $this->runSafely(function () {
+            $poin_get = number_format($this->data->total_amount * config('crm.point_percentage.point'), 0, ',', '.');
+
             // update
-            $this->data->update([
-                'is_completed' => 1,
-                'completed_at' => now(),
-            ]);
+            DB::transaction(function () use ($poin_get) {
+                // update status transaksi
+                $this->data->update([
+                    'is_completed' => 1,
+                    'completed_at' => now(),
+                ]);
+
+                // tambah history poin
+                PointHistory::create([
+                    'transaction_id' => $this->data->id,
+                    'user_id' => $this->data->user_id,
+                    'point_get' => $poin_get,
+                ]);
+
+                // update poin user
+                $this->data->user->profile->increment('points', $poin_get);
+            });
 
             $this->dispatch('swal', [
                 'icon' => 'success',

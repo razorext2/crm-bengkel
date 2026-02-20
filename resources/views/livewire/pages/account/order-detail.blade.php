@@ -194,6 +194,15 @@
                                 <dd class="text-base font-medium text-gray-900 dark:text-white">Rp. 0</dd>
                             </dl>
 
+                            <dl class="flex items-center justify-between gap-4">
+                                <dt class="text-yellow-500 dark:text-yellow-400">Estimasi Poin Yang Didapat</dt>
+                                <dd class="text-base font-medium text-yellow-500 dark:text-yellow-300">
+                                    +
+                                    {{ number_format($totalPrice * config('crm.point_percentage.point'), 0, ',', '.') }}
+                                    Poin
+                                </dd>
+                            </dl>
+
                         </div>
 
                         <dl

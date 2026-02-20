@@ -7,13 +7,13 @@
     </button>
 
     <div wire:show="showCart"
-        class="absolute right-0 top-12 z-50 w-96 space-y-4 overflow-hidden rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800">
+        class="absolute -right-16 top-12 z-50 w-96 space-y-4 overflow-hidden rounded-lg bg-white p-4 shadow-lg lg:right-0 dark:bg-gray-800">
 
         @forelse($carts as $item)
             <div class="grid grid-cols-2">
                 <div>
                     <a href="#"
-                        class="truncate text-sm font-semibold leading-none text-gray-900 hover:underline dark:text-white">
+                        class="truncate text-wrap text-sm font-semibold leading-none text-gray-900 hover:underline dark:text-white">
                         {{ $item->product->product_name }}
                     </a>
                     <p class="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">

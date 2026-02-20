@@ -134,6 +134,14 @@
                             <dd class="text-base font-medium text-gray-900 dark:text-white">Rp. 0</dd>
                         </dl>
 
+                        <dl class="flex items-center justify-between gap-4">
+                            <dt class="text-yellow-500 dark:text-yellow-400">Estimasi Poin Yang Didapat</dt>
+                            <dd class="text-base font-medium text-yellow-900 dark:text-yellow-300">
+                                + {{ number_format($totalPrice * config('crm.point_percentage.point'), 0, ',', '.') }}
+                                Poin
+                            </dd>
+                        </dl>
+
                     </div>
 
                     <dl
@@ -161,7 +169,6 @@
             class="mb-4 space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
 
             @if (!$data->is_delivered)
-
                 <flux:select label="Pilih Jasa Kirim" wire:model="form.shipping_service">
                     <flux:select.option>
                         Pilih jasa kirim...
@@ -187,12 +194,45 @@
                     </flux:button>
                 </div>
             @else
-                <p class="text-white">Pengiriman telah dilakukan
-                    {{ \Carbon\Carbon::parse($data->delivered_at)->format('D, M Y H:I:s') }}.
-                </p>
+                <ul role="list" class="space-y-4">
+                    <li class="flex items-center">
+                        <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                        <span class="text-body dark:text-white">
+                            Pesanan dibuat
+                            {{ \Carbon\Carbon::parse($data->created_at)->format('D, M Y H:I:s') }}.
+                        </span>
+                    </li>
+                    @if (!empty($data->payment_proof))
+                        <li class="flex items-center">
+                            <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                            <span class="text-body dark:text-white">
+                                Pembayaran telah dilakukan.
+                            </span>
+                        </li>
+                    @endif
+                    @if ($data->is_delivered)
+                        <li class="flex items-center">
+                            <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                            <span class="text-body dark:text-white">
+                                Pengiriman telah dilakukan
+                                {{ \Carbon\Carbon::parse($data->delivered_at)->format('D, M Y H:I:s') }}.
+                            </span>
+                        </li>
+                    @endif
+                    @if ($data->is_completed)
+                        <li class="flex items-center">
+                            <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                            <span class="text-body dark:text-white">
+                                Pesanan telah diselesaikan pada
+                                {{ \Carbon\Carbon::parse($data->completed_at)->format('D, M Y H:I:s') }}.
+                            </span>
+                        </li>
+                    @endif
+                </ul>
 
                 @if ($data->is_completed === 0 && $data->order_status === 3)
                     <flux:button type="submit" variant="primary" color="green"
+                        wire:confirm.prompt="Jika pesanan diselesaikan, estimasi poin akan diteruskan ke customer.\nKetik YA untuk menyelesaikan pesanan.|YA"
                         wire:click.prevent="markAsCompleted({{ $data->id }})">
                         Tandai Transaksi Selesai
                     </flux:button>

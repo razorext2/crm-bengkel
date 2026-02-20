@@ -37,7 +37,8 @@
                 <flux:table.cell variant="strong">
                     {{ $row->profile->primaryAddress->address_detail }}
                 </flux:table.cell>
-                <flux:table.cell>{{ $row->profile->points }}</flux:table.cell>
+                <flux:table.cell class="!text-yellow-300">
+                    {{ $row->profile->points }} Poin </flux:table.cell>
                 <flux:table.cell class="flex gap-x-2">
                     <flux:button class="text-xs" color="blue" variant="primary" wire:navigate
                         href="{{ route('customer.view', $row->id) }}" icon="eye" />

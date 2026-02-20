@@ -36,4 +36,8 @@ return [
             'url' => 'https://lionparcel.com/track',
         ],
     ],
+    'point_percentage' => [
+        'cashback' => 0.001,
+        'point' => 0.001,
+    ],
 ];

@@ -47,6 +47,18 @@
             <div class="flex items-center lg:space-x-2">
 
                 @auth
+                    <p data-popover-target="popover-point-hint" class="me-2 text-sm font-medium text-yellow-500 lg:me-4">
+                        Poin: {{ auth()->user()->profile->points }}
+                    </p>
+
+                    <div data-popover id="popover-point-hint" role="tooltip"
+                        class="text-body border-default rounded-base shadow-xs invisible absolute z-10 inline-block w-64 border bg-blue-200 text-sm opacity-0 transition-opacity duration-300">
+                        <div class="px-3 py-2">
+                            1 Poin = 1 Rupiah. Anda dapat menukarnya saat melakukan transaksi.
+                        </div>
+                        <div data-popper-arrow></div>
+                    </div>
+
                     @livewire('utils.cart-navbar')
 
                     <button id="userDropdownButton1" data-dropdown-toggle="userDropdown1" type="button"
@@ -56,7 +68,7 @@
                             <path stroke="currentColor" stroke-width="2"
                                 d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
-                        Profil Saya
+                        <span class="hidden sm:block"> Profil Saya </span>
                         <svg class="ms-1 h-4 w-4 text-gray-900 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -67,6 +79,12 @@
 
                     <div id="userDropdown1"
                         class="z-10 hidden w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
+
+                        <div class="w-full cursor-default bg-red-200 px-5 py-2">
+                            <span class="text-lg font-semibold">{{ auth()->user()->name }}</span>
+                            <span class="text-sm">{{ auth()->user()->email }}</span>
+                        </div>
+
                         <ul class="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
                             {{-- <li>
                                 <a href="{{ route('account.me') }}" title=""
@@ -118,7 +136,7 @@
                         </div>
                     </div>
 
-                    <button type="button" data-collapse-toggle="ecommerce-navbar-menu-1"
+                    {{-- <button type="button" data-collapse-toggle="ecommerce-navbar-menu-1"
                         aria-controls="ecommerce-navbar-menu-1" aria-expanded="false"
                         class="inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-gray-100 lg:hidden dark:text-white dark:hover:bg-gray-700">
                         <span class="sr-only">
@@ -129,7 +147,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                                 d="M5 7h14M5 12h14M5 17h14" />
                         </svg>
-                    </button>
+                    </button> --}}
                 @else
                     <div id="myCartDropdownButton1" class="text-right text-xs md:text-sm">
                         <p class="text-gray-800">Anda melihat sebagai <span class="font-bold">Guest</span></p>
@@ -142,7 +160,7 @@
             </div>
         </div>
 
-        <div id="ecommerce-navbar-menu-1"
+        {{-- <div id="ecommerce-navbar-menu-1"
             class="mt-4 hidden rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-600 dark:bg-gray-700">
             <ul class="space-y-3 text-sm font-medium text-gray-900 dark:text-white dark:text-white">
                 <li>
@@ -164,6 +182,6 @@
                     <a href="#" class="hover:text-blue-700 dark:hover:text-blue-500">Home & Garden</a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </div>
 </nav>

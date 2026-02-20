@@ -10,7 +10,7 @@
             valueField="id" labelField="category_name" errorName="category" />
     </div>
 
-    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
         @forelse ($products as $row)
             <div class="items-center rounded-lg bg-gray-50 shadow dark:border-gray-700 dark:bg-gray-800">
@@ -46,14 +46,14 @@
                     <p class="text-gring-gray-500 text-sm dark:text-gray-400">Kategori:
                         {{ $row->category->category_name }}</p>
 
-                    <div class="mt-4 flex flex-col justify-center gap-2 lg:flex-row">
+                    <div class="mt-4 flex items-center justify-center gap-2">
                         <button wire:click="addToCart('{{ $row->id }}')" type="button"
-                            class="bg-brand hover:bg-brand-strong focus:ring-brand-medium shadow-xs rounded-base box-border cursor-pointer border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white focus:outline-none focus:ring-4">
+                            class="bg-brand hover:bg-brand-strong focus:ring-brand-medium shadow-xs rounded-base box-border w-fit cursor-pointer border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white focus:outline-none focus:ring-4">
                             Keranjang
                         </button>
 
                         <button type="button"
-                            class="bg-pink shadow-xs rounded-base box-border flex cursor-pointer items-center gap-x-1 border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white hover:bg-pink-600 focus:outline-none focus:ring-4 focus:ring-pink-700"
+                            class="bg-pink shadow-xs rounded-base box-border flex w-fit cursor-pointer items-center gap-x-1 border border-transparent px-4 py-2.5 text-sm font-medium leading-5 text-white hover:bg-pink-600 focus:outline-none focus:ring-4 focus:ring-pink-700"
                             wire:click.prevent="addToFavorite('{{ $row->id }}')">
                             @if (auth()->check() && auth()->user()->favoriteProducts->contains($row->id))
                                 <svg class="h-4 w-4 fill-red-700 text-white" aria-hidden="true"
