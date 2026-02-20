@@ -49,6 +49,12 @@
                             Pesanan Selesai
                         </span>
                     @endif
+                    @if ($row->is_delivered === 0 && $row->order_status === 1)
+                        <span
+                            class="inline-flex w-fit items-center rounded bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                            Perlu Dikirim
+                        </span>
+                    @endif
                 </flux:table.cell>
                 <flux:table.cell variant="strong">
                     {{ $row->shipping_service ?? 'Belum dipilih' }} (Rp.

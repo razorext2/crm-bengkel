@@ -1,30 +1,34 @@
 <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-4">
-    <div class="shadow-xs">
+    <div class="col-span-full flex items-center gap-x-2">
+        <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+            Transaksi #{{ $data->invoice_number }}
+        </h2>
 
-        <div class="mb-2 flex items-center gap-x-2">
-            <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                Transaksi #{{ $data->invoice_number }}
+        @php
+            $totalPrice = 0;
+        @endphp
+
+        <span
+            class="{{ $this->setStatus($data->order_status) ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
+            {{ $data->order_status_description['description'] }}
+        </span>
+
+        @if ($data->order_status == 0 && $data->payment_proof)
+            <span
+                class="inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                Menunggu Verifikasi
+            </span>
+        @endif
+    </div>
+
+    <div class="shadow-xs flex flex-col gap-2 lg:gap-4">
+        {{-- info transaksi --}}
+        <div
+            class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 sm:space-y-2 dark:border-gray-700 dark:bg-gray-800">
+            <h2 class="mb-2 flex items-center gap-x-2 text-lg font-semibold text-gray-900 dark:text-white">
+                Informasi Transaksi
             </h2>
 
-            @php
-                $totalPrice = 0;
-            @endphp
-
-            <span
-                class="{{ $this->setStatus($data->order_status) ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
-                {{ $data->order_status_description['description'] }}
-            </span>
-
-            @if ($data->order_status == 0 && $data->payment_proof)
-                <span
-                    class="inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                    Menunggu Verifikasi
-                </span>
-            @endif
-        </div>
-
-        <div
-            class="mb-4 space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 sm:space-y-2 dark:border-gray-700 dark:bg-gray-800">
             <dl class="items-start justify-between gap-4 sm:flex">
                 <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Tanggal</dt>
                 <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
@@ -70,10 +74,11 @@
                 </dd>
             </dl>
         </div>
+        {{-- end info transaksi --}}
 
         {{-- products --}}
         <div
-            class="mb-4 space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 sm:space-y-2 dark:border-gray-700 dark:bg-gray-800">
+            class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 sm:space-y-2 dark:border-gray-700 dark:bg-gray-800">
             <h2 class="mb-2 flex items-center gap-x-2 text-lg font-semibold text-gray-900 dark:text-white">
                 Detail Produk
             </h2>
@@ -113,7 +118,7 @@
             </table>
 
             <div class="mt-4 space-y-6">
-                <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Order summary</h4>
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Order summary</h4>
 
                 <div class="space-y-4">
                     <div class="space-y-2">
@@ -128,6 +133,15 @@
                             <dt class="text-gray-500 dark:text-gray-400">Diskon</dt>
                             <dd class="text-base font-medium text-green-500">-</dd>
                         </dl>
+
+                        @if ($data->usedPoints->count() > 0)
+                            <dl class="flex items-center justify-between gap-4">
+                                <dt class="text-red-500 dark:text-red-400">Potongan Dari Poin</dt>
+                                <dd class="text-base font-medium text-red-500">
+                                    - Rp. {{ number_format($data->usedPoints->first()->point_used, 2, ',', '.') }}
+                                </dd>
+                            </dl>
+                        @endif
 
                         <dl class="flex items-center justify-between gap-4">
                             <dt class="text-gray-500 dark:text-gray-400">Biaya Jasa Kirim</dt>
@@ -158,17 +172,65 @@
     </div>
 
     <form wire:submit.prevent="store" class="flex h-fit w-full flex-col">
+        <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
 
-        <div class="mb-2 flex items-center gap-x-2">
-            <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                Update Pengiriman
+            <h2 class="mb-2 flex items-center gap-x-2 text-lg font-semibold text-gray-900 lg:dark:text-white">
+                Status Pesanan
             </h2>
+
+            <ul role="list" class="space-y-4">
+                <li class="flex items-center">
+                    <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                    <span class="text-body dark:text-white">
+                        Pesanan dibuat
+                        {{ \Carbon\Carbon::parse($data->created_at)->format('D, M Y H:I:s') }}.
+                    </span>
+                </li>
+                @if (!empty($data->payment_proof))
+                    <li class="flex items-center">
+                        <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                        <span class="text-body dark:text-white">
+                            Pembayaran telah dilakukan.
+                        </span>
+                    </li>
+                @endif
+                @if ($data->is_delivered)
+                    <li class="flex items-center">
+                        <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                        <span class="text-body dark:text-white">
+                            Pengiriman telah dilakukan
+                            {{ \Carbon\Carbon::parse($data->delivered_at)->format('D, M Y H:I:s') }}.
+                        </span>
+                    </li>
+                @endif
+                @if ($data->is_completed)
+                    <li class="flex items-center">
+                        <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
+                        <span class="text-body dark:text-white">
+                            Pesanan telah diselesaikan pada
+                            {{ \Carbon\Carbon::parse($data->completed_at)->format('D, M Y H:I:s') }}.
+                        </span>
+                    </li>
+                @endif
+            </ul>
+
+            @if ($data->is_completed === 0 && $data->order_status === 3)
+                <flux:button type="submit" variant="primary" color="green"
+                    wire:confirm.prompt="Jika pesanan diselesaikan, estimasi poin akan diteruskan ke customer.\nKetik YA untuk menyelesaikan pesanan.|YA"
+                    wire:click.prevent="markAsCompleted({{ $data->id }})">
+                    Tandai Transaksi Selesai
+                </flux:button>
+            @endif
         </div>
 
-        <div
-            class="mb-4 space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+        @if (!$data->is_delivered)
+            <div
+                class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
 
-            @if (!$data->is_delivered)
+                <h2 class="mb-2 flex items-center gap-x-2 text-lg font-semibold text-gray-900 lg:dark:text-white">
+                    Update Pengiriman
+                </h2>
+
                 <flux:select label="Pilih Jasa Kirim" wire:model="form.shipping_service">
                     <flux:select.option>
                         Pilih jasa kirim...
@@ -193,51 +255,7 @@
                         Perbarui Pengiriman
                     </flux:button>
                 </div>
-            @else
-                <ul role="list" class="space-y-4">
-                    <li class="flex items-center">
-                        <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
-                        <span class="text-body dark:text-white">
-                            Pesanan dibuat
-                            {{ \Carbon\Carbon::parse($data->created_at)->format('D, M Y H:I:s') }}.
-                        </span>
-                    </li>
-                    @if (!empty($data->payment_proof))
-                        <li class="flex items-center">
-                            <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
-                            <span class="text-body dark:text-white">
-                                Pembayaran telah dilakukan.
-                            </span>
-                        </li>
-                    @endif
-                    @if ($data->is_delivered)
-                        <li class="flex items-center">
-                            <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
-                            <span class="text-body dark:text-white">
-                                Pengiriman telah dilakukan
-                                {{ \Carbon\Carbon::parse($data->delivered_at)->format('D, M Y H:I:s') }}.
-                            </span>
-                        </li>
-                    @endif
-                    @if ($data->is_completed)
-                        <li class="flex items-center">
-                            <x-icons.check class="text-fg-brand me-1.5 h-5 w-5 shrink-0" />
-                            <span class="text-body dark:text-white">
-                                Pesanan telah diselesaikan pada
-                                {{ \Carbon\Carbon::parse($data->completed_at)->format('D, M Y H:I:s') }}.
-                            </span>
-                        </li>
-                    @endif
-                </ul>
-
-                @if ($data->is_completed === 0 && $data->order_status === 3)
-                    <flux:button type="submit" variant="primary" color="green"
-                        wire:confirm.prompt="Jika pesanan diselesaikan, estimasi poin akan diteruskan ke customer.\nKetik YA untuk menyelesaikan pesanan.|YA"
-                        wire:click.prevent="markAsCompleted({{ $data->id }})">
-                        Tandai Transaksi Selesai
-                    </flux:button>
-                @endif
-            @endif
-        </div>
+            </div>
+        @endif
     </form>
 </div>

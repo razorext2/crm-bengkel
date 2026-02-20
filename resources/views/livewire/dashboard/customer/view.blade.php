@@ -1,61 +1,103 @@
 <div class="flex flex-col gap-4 lg:flex-row">
 
-    {{-- customer profile info --}}
-    <div
-        class="border-default rounded-base shadow-xs flex h-fit flex-col border bg-gray-400 md:flex-row lg:flex-1 dark:bg-gray-700">
-        <div class="shrink-0 md:w-44">
-            <img class="rounded-base md:rounded-l-base h-full w-full object-cover md:rounded-none"
-                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-        </div>
-        <div class="flex grow flex-col justify-between p-4 leading-normal lg:p-6">
-            <h5 class="text-heading text-2xl font-bold tracking-tight">
-                {{ $user->name }}
-            </h5>
-            <p class="mb-2 text-sm"> {{ $user->email }}</p>
+    <div class="flex flex-col gap-2 lg:gap-4">
+        {{-- customer profile info --}}
+        <div
+            class="border-default rounded-base shadow-xs flex h-fit flex-col border bg-gray-400 md:flex-row lg:flex-1 dark:bg-gray-700">
+            <div class="shrink-0 md:w-44">
+                <img class="rounded-base md:rounded-l-base h-full w-full object-cover md:rounded-none"
+                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+            </div>
+            <div class="flex grow flex-col justify-between p-4 leading-normal lg:p-6">
+                <h5 class="text-heading text-2xl font-bold tracking-tight">
+                    {{ $user->name }}
+                </h5>
+                <p class="mb-2 text-sm"> {{ $user->email }}</p>
 
-            <div class="w-full">
-                <dl class="flex items-center justify-between gap-4">
-                    <dt class="text-gray-500 dark:text-gray-400">No. Telepon</dt>
-                    <dd class="text-righ text-base font-medium text-gray-900 dark:text-white">
-                        {{ $user->profile->phone_number }}
-                    </dd>
-                </dl>
-                <dl class="flex items-center justify-between gap-4">
-                    <dt class="text-gray-500 dark:text-gray-400">Alamat Utama</dt>
-                    <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
-                        {{ $user->profile->primaryAddress->address_detail }}
-                    </dd>
-                </dl>
-                <dl class="flex items-center justify-between gap-4">
-                    <dt class="text-gray-500 dark:text-gray-400">Poin</dt>
-                    <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
-                        {{ $user->profile->points }} Poin
-                    </dd>
-                </dl>
-                <dl class="flex items-center justify-between gap-4">
-                    <dt class="text-gray-500 dark:text-gray-400">Total Transaksi</dt>
-                    <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
-                        {{ $user->transactions->count() }} Kali
-                    </dd>
-                </dl>
-                <dl class="flex items-center justify-between gap-4">
-                    <dt class="text-gray-500 dark:text-gray-400">Total Ulasan</dt>
-                    <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
-                        {{ $user->review->count() }} Ulasan
-                    </dd>
-                </dl>
-                <dl class="flex items-center justify-between gap-4">
-                    <dt class="text-gray-500 dark:text-gray-400">Produk Disimpan</dt>
-                    <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
-                        {{ $user->favorites->count() ?? 'N/A' }} Produk
-                    </dd>
-                </dl>
+                <div class="w-full">
+                    <dl class="flex items-center justify-between gap-4">
+                        <dt class="text-gray-500 dark:text-gray-400">No. Telepon</dt>
+                        <dd class="text-righ text-base font-medium text-gray-900 dark:text-white">
+                            {{ $user->profile->phone_number }}
+                        </dd>
+                    </dl>
+                    <dl class="flex items-center justify-between gap-4">
+                        <dt class="text-gray-500 dark:text-gray-400">Alamat Utama</dt>
+                        <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
+                            {{ $user->profile->primaryAddress->address_detail }}
+                        </dd>
+                    </dl>
+                    <dl class="flex items-center justify-between gap-4">
+                        <dt class="text-gray-500 dark:text-gray-400">Poin</dt>
+                        <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
+                            {{ $user->profile->points }} Poin
+                        </dd>
+                    </dl>
+                    <dl class="flex items-center justify-between gap-4">
+                        <dt class="text-gray-500 dark:text-gray-400">Total Transaksi</dt>
+                        <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
+                            {{ $user->transactions->count() }} Kali
+                        </dd>
+                    </dl>
+                    <dl class="flex items-center justify-between gap-4">
+                        <dt class="text-gray-500 dark:text-gray-400">Total Ulasan</dt>
+                        <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
+                            {{ $user->review->count() }} Ulasan
+                        </dd>
+                    </dl>
+                    <dl class="flex items-center justify-between gap-4">
+                        <dt class="text-gray-500 dark:text-gray-400">Produk Disimpan</dt>
+                        <dd class="text-right text-base font-medium text-gray-900 dark:text-white">
+                            {{ $user->favorites->count() ?? 'N/A' }} Produk
+                        </dd>
+                    </dl>
+                </div>
             </div>
         </div>
-    </div>
-    {{-- end customer profile --}}
+        {{-- end customer profile --}}
 
-    <div class="flex flex-col gap-2 lg:gap-4">
+        {{-- latest point history --}}
+        <div
+            class="border-default rounded-base shadow-xs h-fit border bg-gray-400 p-4 lg:flex-1 lg:p-6 dark:bg-gray-700">
+            <div class="mb-4 flex items-center justify-between">
+                <h5 class="text-heading text-xl font-semibold leading-none">5 Riwayat Transaksi Poin</h5>
+                {{-- <a href="#" class="text-fg-brand font-medium hover:underline">View all</a> --}}
+            </div>
+
+            <div class="flow-root">
+                <ul role="list" class="divide-default divide-y">
+                    @forelse($user->pointHistories->take(5)->reverse() as $row)
+                        <li class="py-4 sm:py-4">
+                            <div class="flex items-center gap-2">
+                                <div class="min-w-0 flex-1">
+                                    <p class="text-heading truncate font-medium">
+                                        #{{ $row->transaction->invoice_number }}
+                                    </p>
+
+                                    <p
+                                        class="{{ $row->point_get ? 'text-green-500' : 'text-red-500' }} truncate text-sm">
+                                        {{ $row->point_get ? 'Mendapatkan ' : 'Menggunakan ' }}
+                                        {{ number_format($row->point_get ? $row->point_get : $row->point_used, '0', ',', '.') }}
+                                        Poin
+                                    </p>
+                                </div>
+                                <div class="text-heading inline-flex items-center text-sm font-medium">
+                                    {{ $row->created_at->format('D, d M Y H:i:s') }}
+                                </div>
+                            </div>
+                        </li>
+                    @empty
+                        <li class="py-4 sm:py-4">
+                            <p class="text-body text-sm">Belum ada history poin</p>
+                        </li>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+        {{-- end latest point history --}}
+    </div>
+
+    <div class="flex flex-1 flex-col gap-2 lg:gap-4">
         {{-- latest transactions --}}
         <div
             class="border-default rounded-base shadow-xs h-fit border bg-gray-400 p-4 lg:flex-1 lg:p-6 dark:bg-gray-700">
@@ -65,7 +107,7 @@
             </div>
             <div class="flow-root">
                 <ul role="list" class="divide-default divide-y">
-                    @forelse($user->transactions->take(5) as $row)
+                    @forelse($user->transactions->take(5)->reverse() as $row)
                         <li class="py-4 sm:py-4">
                             <div class="flex items-center gap-2">
                                 <div class="min-w-0 flex-1">
@@ -104,7 +146,7 @@
                                     </p>
                                 </div>
                                 <div class="text-heading inline-flex items-center font-medium">
-                                    {{ $row->created_at->format('D, M Y H:i:s') }}
+                                    {{ $row->created_at->format('D, d M Y H:i:s') }}
                                 </div>
                             </div>
                         </li>
@@ -130,17 +172,23 @@
                         <li class="py-4 sm:py-4">
                             <div class="flex items-center gap-2">
                                 <div class="min-w-0 flex-1">
-                                    <p class="text-heading truncate font-medium">
+                                    <a href="{{ route('product.edit', $row->product->id) }}"
+                                        class="text-heading truncate font-medium hover:underline">
                                         {{ $row->product->product_name }}
-                                    </p>
+                                    </a>
 
                                     <p class="text-body truncate text-sm">
                                         {{ $row->review }}
                                     </p>
                                 </div>
                                 <div class="text-heading items-center font-medium">
-                                    <p>{{ $row->rating }}</p>
-                                    <p>{{ $row->created_at->format('D, M Y H:i:s') }}</p>
+                                    <div class="flex">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <x-icons.star
+                                                class="{{ $row->rating >= $i ? 'text-yellow-400' : 'text-gray-400' }} h-5 w-5" />
+                                        @endfor
+                                    </div>
+                                    <p>{{ $row->created_at->format('D, d M Y H:i:s') }}</p>
                                 </div>
                             </div>
                         </li>

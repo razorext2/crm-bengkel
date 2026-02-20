@@ -41,6 +41,23 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetail::class, 'transaction_id', 'id');
     }
 
+    public function pointHistories()
+    {
+        return $this->hasMany(PointHistory::class, 'transaction_id', 'id');
+    }
+
+    public function usedPoints()
+    {
+        return $this->hasMany(PointHistory::class, 'transaction_id', 'id')
+            ->whereNotNull('point_used');
+    }
+
+    public function pointsGet()
+    {
+        return $this->hasMany(PointHistory::class, 'transaction_id', 'id')
+            ->whereNotNull('point_get');
+    }
+
     public function getOrderStatusDescriptionAttribute()
     {
         return match ($this->order_status) {

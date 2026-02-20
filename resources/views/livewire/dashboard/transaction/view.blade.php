@@ -65,6 +65,7 @@
                 {{ $data->user->profile?->primaryAddress?->postal_code }})
             </dd>
         </dl>
+
         <dl class="items-start justify-between gap-4 sm:flex">
             <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">
                 Jasa Kirim
@@ -150,6 +151,15 @@
                         <dt class="text-gray-500 dark:text-gray-400">Diskon</dt>
                         <dd class="text-base font-medium text-green-500">-</dd>
                     </dl>
+
+                    @if ($data->usedPoints->count() > 0)
+                        <dl class="flex items-center justify-between gap-4">
+                            <dt class="text-red-500 dark:text-red-400">Potongan Dari Poin</dt>
+                            <dd class="text-base font-medium text-red-500">
+                                - Rp. {{ number_format($data->usedPoints->first()->point_used, 2, ',', '.') }}
+                            </dd>
+                        </dl>
+                    @endif
 
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-gray-500 dark:text-gray-400">Biaya Jasa Kirim</dt>

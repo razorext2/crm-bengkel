@@ -21,12 +21,12 @@
                 @endphp
 
                 <dd
-                    class="{{ $statusColors[$data->order_status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} me-2 mt-1.5 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
+                    class="{{ $statusColors[$data->order_status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' }} mt-1.5 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium">
                     {{ $data->order_status_description['description'] }}
                 </dd>
                 @if ($data->order_status == 0 && $data->payment_proof)
                     <dd
-                        class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                        class="mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
                         Menunggu Verifikasi
                     </dd>
                 @endif
@@ -80,8 +80,12 @@
                 <dl class="items-start justify-between gap-4 sm:flex">
                     <dt class="mb-1 font-normal text-gray-500 sm:mb-0 dark:text-gray-400">Jasa Kirim</dt>
                     <dd class="font-medium text-gray-900 sm:text-end dark:text-white">
-                        {{ \App\Helpers\JasaKirim::jasaKirimName($data->shipping_service) }}
-                        (No resi: {{ $data->resi_number }})
+                        @if ($data->shipping_service)
+                            {{ \App\Helpers\JasaKirim::jasaKirimName($data->shipping_service) }}
+                            (No resi: {{ $data->resi_number }})
+                        @else
+                            Belum ditentukan toko.
+                        @endif
                     </dd>
                 </dl>
                 <dl class="items-start justify-between gap-4 sm:flex">
@@ -189,6 +193,15 @@
                                 <dd class="text-base font-medium text-green-500">-</dd>
                             </dl>
 
+                            @if ($pointsIsUsed)
+                                <dl class="flex items-center justify-between gap-4">
+                                    <dt class="text-red-500 dark:text-red-400">Potongan Dari Poin</dt>
+                                    <dd class="text-base font-medium text-red-500">
+                                        - Rp. {{ number_format($data->usedPoints->first()->point_used, 2, ',', '.') }}
+                                    </dd>
+                                </dl>
+                            @endif
+
                             <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-gray-500 dark:text-gray-400">Biaya Jasa Kirim</dt>
                                 <dd class="text-base font-medium text-gray-900 dark:text-white">Rp. 0</dd>
@@ -202,14 +215,14 @@
                                     Poin
                                 </dd>
                             </dl>
-
                         </div>
 
                         <dl
                             class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                             <dt class="text-lg font-bold text-gray-900 dark:text-white">Total</dt>
                             <dd class="text-lg font-bold text-gray-900 dark:text-white">Rp.
-                                {{ number_format($totalPrice, 2, ',', '.') }}</dd>
+                                {{ number_format($data->total_amount, 2, ',', '.') }}
+                            </dd>
                         </dl>
                     </div>
                 </div>

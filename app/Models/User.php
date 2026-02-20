@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
 
+    public function pointHistories()
+    {
+        return $this->hasMany(PointHistory::class, 'user_id', 'id');
+    }
+
     public function review()
     {
         return $this->hasMany(ProductReview::class, 'user_id', 'id');

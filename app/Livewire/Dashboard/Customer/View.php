@@ -16,7 +16,7 @@ class View extends Component
 
     public function render()
     {
-        $user = User::with('profile', 'transactions', 'review', 'favorites')
+        $user = User::with('profile', 'transactions', 'review', 'favorites', 'pointHistories')
             ->findOrFail($this->id);
 
         return view('livewire.dashboard.customer.view', [

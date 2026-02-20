@@ -20,13 +20,19 @@ class OrderDetail extends Component
 
     public ?bool $showPaymentProofModal = false;
 
+    public ?bool $pointsIsUsed = false;
+
     public function mount($id)
     {
         $this->id = $id;
-        $this->data = \App\Models\Transaction::with('transactionDetail')
+        $this->data = \App\Models\Transaction::with('transactionDetail', 'usedPoints', 'pointsGet')
             ->where('user_id', auth()->id())
             ->where('id', $id)
             ->firstOrFail();
+
+        if ($this->data->usedPoints?->first() !== null) {
+            $this->pointsIsUsed = true;
+        }
     }
 
     public function storeLampiran()
