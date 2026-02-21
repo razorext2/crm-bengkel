@@ -56,6 +56,16 @@
                     Produk
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="percent-badge" :href="route('promo.index')"
+                    :current="request()->routeIs('promo.*')" wire:navigate>
+                    Promo
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="receipt-percent" :href="route('voucher.index')"
+                    :current="request()->routeIs('voucher.*')" wire:navigate>
+                    Voucher
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="users" :href="route('customer.index')"
                     :current="request()->routeIs('customer.*')" wire:navigate>
                     Data Pelanggan

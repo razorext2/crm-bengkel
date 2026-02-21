@@ -78,7 +78,18 @@ Route::middleware('auth')
                 Route::view('/delivery', 'dashboard.delivery.index')->name('delivery.index');
                 Route::view('/delivery/view/{id}', 'dashboard.delivery.view')->name('delivery.view');
 
+                // laporan
                 Route::view('/report', 'dashboard.report.index')->name('report.index');
+
+                // promo
+                Route::view('/promo', 'dashboard.promo.index')->name('promo.index');
+                Route::view('/promo/create', 'dashboard.promo.create')->name('promo.create');
+                Route::view('/promo/edit/{id}', 'dashboard.promo.edit')->name('promo.edit');
+
+                // vouchers
+                Route::view('/voucher', 'dashboard.voucher.index')->name('voucher.index');
+                Route::view('/voucher/create', 'dashboard.voucher.create')->name('voucher.create');
+                Route::view('/voucher/edit/{id}', 'dashboard.voucher.edit')->name('voucher.edit');
             });
     });
 
