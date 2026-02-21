@@ -24,6 +24,10 @@ class Transaction extends Model
         'completed_at',
     ];
 
+    protected $appends = [
+        'order_status_description',
+    ];
+
     public function casts()
     {
         return [

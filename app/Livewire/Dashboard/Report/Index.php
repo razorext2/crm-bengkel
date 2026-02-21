@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Dashboard\Report;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Index extends Component
@@ -16,19 +18,44 @@ class Index extends Component
 
     public ?array $status_choice = [];
 
+    public function rules()
+    {
+        return [
+            'laporan_type' => 'required',
+        ];
+    }
+
     public function make()
     {
         $model = $this->laporan_type;
 
-        // buat query
-        $data = $model::query()->when($this->status, function ($query) {
-            dd($this->status);
-            foreach ($this->status as $field => $value) {
-                $query->where($field, $value);
-            }
-        })->get();
+        $data = $model::query()
+            ->when($this->status, function ($query) {
+                foreach ($this->status as $field => $value) {
+                    $query->where($field, $value);
+                }
+            })
+            ->when($this->date_from && $this->date_to, function ($query) {
+                $query->whereBetween('created_at', [
+                    $this->date_from,
+                    $this->date_to,
+                ]);
+            })
+            ->get()
+            ->map(function ($item) {
+                return json_decode(
+                    json_encode($item, JSON_UNESCAPED_UNICODE),
+                    true
+                );
+            });
 
-        dd($data->toArray());
+        $pdf = Pdf::loadView('dashboard.report.template.transaction', [
+            'orders' => $data,
+        ]);
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'transaksi-'.Str::ulid().'.pdf');
     }
 
     public function updatedLaporanType()
@@ -40,11 +67,11 @@ class Index extends Component
                         'field' => 'is_completed',
                         'value' => [
                             [
-                                'value' => true,
+                                'value' => 1,
                                 'label' => 'Selesai',
                             ],
                             [
-                                'value' => false,
+                                'value' => 0,
                                 'label' => 'Belum Selesai',
                             ],
                         ],
@@ -53,11 +80,11 @@ class Index extends Component
                         'field' => 'is_delivered',
                         'value' => [
                             [
-                                'value' => true,
+                                'value' => 1,
                                 'label' => 'Sudah Dikirim',
                             ],
                             [
-                                'value' => false,
+                                'value' => 0,
                                 'label' => 'Belum Dikirim',
                             ],
                         ],
@@ -88,6 +115,11 @@ class Index extends Component
                         ],
                     ],
                 ],
+            ],
+            '\App\Models\User' => [
+                'status' => [
+
+                ],
             ]
         };
 
@@ -100,6 +132,7 @@ class Index extends Component
             [
                 'label' => 'Transaksi Penjualan',
                 'model' => '\App\Models\Transaction',
+                'view' => 'dashboard.report.template.transaction',
             ],
             // [
             //     'label' => 'Data Pelanggan',

@@ -13,6 +13,32 @@
             <flux:sidebar.collapse class="lg:hidden" />
         </flux:sidebar.header>
 
+        <flux:sidebar.nav class="hidden md:block">
+            <flux:sidebar.item class="px-2 py-0.5">
+                <div x-data="{
+                    time: '',
+                    date: '',
+                    init() {
+                        setInterval(() => {
+                            const now = new Date();
+                            this.time = now.toLocaleTimeString('id-ID');
+                            this.date = now.toLocaleDateString('id-ID', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        }, 1000);
+                    }
+                }" x-init="init">
+
+                    <div x-text="date" class="text-sm text-gray-500"></div>
+                    <div x-text="time" class="text-base font-bold"></div>
+
+                </div>
+            </flux:sidebar.item>
+        </flux:sidebar.nav>
+
         <flux:sidebar.nav>
             <flux:sidebar.group :heading="__('Fitur')" class="grid">
                 <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"

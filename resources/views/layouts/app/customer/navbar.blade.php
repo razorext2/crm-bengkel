@@ -44,7 +44,31 @@
                 </ul>
             </div>
 
+
+
             <div class="flex items-center lg:space-x-2">
+
+                <div x-data="{
+                    time: '',
+                    date: '',
+                    init() {
+                        setInterval(() => {
+                            const now = new Date();
+                            this.time = now.toLocaleTimeString('id-ID');
+                            this.date = now.toLocaleDateString('id-ID', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        }, 1000);
+                    }
+                }" x-init="init" class="me-4 hidden text-right md:block">
+
+                    <div x-text="date" class="text-sm text-gray-500"></div>
+                    <div x-text="time" class="text-base font-bold"></div>
+
+                </div>
 
                 @auth
                     <p data-popover-target="popover-point-hint" class="me-2 text-sm font-medium text-yellow-500 lg:me-4">

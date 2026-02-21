@@ -16,10 +16,10 @@
     @if ($laporan_type)
         @foreach ($status_choice['status'] as $row)
             <div class="col-span-full">
-                <flux:select label="Pilih nilai dari field {{ $row['field'] }}"
+                <flux:select label="Pilih kondisi dari field {{ $row['field'] }}"
                     wire:model.live="status.{{ $row['field'] }}">
-                    <flux:select.option>
-                        Pilih status...
+                    <flux:select.option value="null">
+                        Pilih kondisi...
                     </flux:select.option>
                     @foreach ($row['value'] as $val)
                         <flux:select.option value="{{ $val['value'] }}">
@@ -30,6 +30,10 @@
             </div>
         @endforeach
     @endif
+
+    <flux:input type="date" name="datefrom" wire:model="date_from" max="2999-12-31" label="Tanggal Dari..." />
+
+    <flux:input type="date" name="dateto" wire:model="date_to" max="2999-12-31" label="Tanggal Hingga" />
 
     <div class="col-span-2 flex justify-start">
         <flux:button type="submit" icon:trailing="chevron-right" variant="primary" color="green">
